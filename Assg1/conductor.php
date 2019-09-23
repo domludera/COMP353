@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "password";
-$dbname = "ass1";
+$dbname = "ASSG1";
 
 $delimiter = "/\+-+\+/";
 $valueparser = "/\|(\S+)\|(\S+)\|(\S*)\|(\d+)\|(\d+)\|/";
@@ -18,7 +18,7 @@ else
     "Connected successfully\n";
 
 //Query PHP->MYSQL
-$myfile = file_get_contents("ass1.sql");
+$myfile = file_get_contents("assg1.sql");
 
 
 if (mysqli_multi_query($conn, $myfile))
