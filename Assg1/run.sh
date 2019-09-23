@@ -1,1 +1,1 @@
-php -f filename.php
+php -f conductor.php
