@@ -94,7 +94,7 @@ class Assignment1 {
             switch($n){
                 case 1:
                     if(preg_match($valueparser, $currentString, $matches_out)){
-                        $result = $conn->query("INSERT INTO Invitees VALUES ('$matches_out[4]', '$matches_out[2]', " . (strlen($matches_out[3])==0 ? "null" : "'matches_out[3]'") . ", '$matches_out[1]', '$matches_out[5]')");
+                        $result = $conn->query("INSERT INTO Invitees VALUES ('$matches_out[4]', '$matches_out[2]', " . (strlen($matches_out[3])==0 ? "null" : "'$matches_out[3]'") . ", '$matches_out[1]', '$matches_out[5]')");
                         if(!$result){
                             die($conn->error);
                         }
