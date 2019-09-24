@@ -1,0 +1,12 @@
+SELECT * FROM Invitees;
+SELECT * FROM Events;
+SELECT * FROM Attendances;
+SELECT i.firstname, i.lastname, e.event FROM Invitees i, Events e  where i.userId = e.adminUserId;
+SELECT e.event FROM Events e, Attendances a  where e.eventId = a.eventId;
+SELECT e.event, i.firstname, i.lastname FROM Events e, Invitees i, Attendances a  where e.eventId = a.eventId and i.userId = a.inviteeId;
+SELECT i.firstname, i.lastname, e.event, e.start_date, e.end_date FROM Invitees i, Attendances a , Events e where i.userId = a.inviteeId and a.eventId = e.eventId ;
+SELECT i.firstname, i.lastname FROM Invitees i, Attendances a  where i.userId = a.inviteeId;
+
+
+
+
