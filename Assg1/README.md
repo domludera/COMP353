@@ -1,8 +1,25 @@
-# COMP 353 Assignment P1
+COMP 353-F
+Instructor: Bipin C. Desai
+Project 1
+COMP 353_group_22:
+Zachary LAPOINTE, 27518536
+Dominik LUDERA, 40062500
+Hugo JONCOUR, 40139230
+Erik SMITH, 40002747
+Priscilla COURNOYER, 27710690
 
 ## Technologies:
  - PHP 7.2
  - MySQL 5.7
+ 
+## Files:
+ - assg1.sql
+ - conductor.php
+ - config.ini
+ - db19s-P1.csv
+ - p1_examples_query
+ - README.md
+ - run.sh
 
 ## Instructions:
  - Create database, prior to run the code

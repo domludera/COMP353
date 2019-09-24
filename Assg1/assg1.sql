@@ -1,3 +1,15 @@
+/*
+COMP 353-F
+Instructor: Bipin C. Desai
+Project 1
+COMP 353_group_22:
+Zachary LAPOINTE, 27518536
+Dominik LUDERA, 40062500
+Hugo JONCOUR, 40139230
+Erik SMITH, 40002747
+Priscilla COURNOYER, 27710690
+*/
+
 CREATE TABLE Invitees
 (
     userId      INT NOT NULL PRIMARY KEY,
