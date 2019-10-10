@@ -1,0 +1,15 @@
+Using the above relation schemes find the names of classmates 
+
+(pairs of students) -> Student1, Student2
+
+who have taken more than one course with the professor.
+Express the query in RA. Note if there is the pair Name1, Name2 in the result, it must not have the Name2, Name1 as well!
+If the query can't be written in RA, explain why.
+
+
+
+-Check students who have taken the same courses -> return pair
+
+-check who is the professor of the course
+
+X = π Student.sid, Student.sname, Student2.sid, Student2.sname, Enrollment.cid (σ (Student.sid ≠ Student2.sid ∧ Enrollment.cid = Enrollment2.cid) ((Student ⨝ Enrollment) ⨯ ((ρ Student2 (Student)) ⨝ (ρ Enrollment2 (Enrollment)))))
