@@ -1,0 +1,6 @@
+# enable the mod to rewrite requests
+RewriteEngine on
+
+# If we receive a css,js,jpeg,gif or png file request, rewrite the request to the index as a URI Parameter
+RewriteCond %{REQUEST_URI} !\.(?:css|js|jpe?g|gif|png)$ [NC]
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ index.php?p=$1

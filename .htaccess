@@ -1,0 +1,5 @@
+# Enable the rewrite mod for this directory
+RewriteEngine on
+
+# all inbound requests should be redirected to the Webroot folder and appended the URI to the path
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ Webroot/$1
