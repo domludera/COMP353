@@ -1,5 +1,13 @@
-# Enable the rewrite mod for this directory
 RewriteEngine on
+RewriteBase /
+
+# Rewrite all those to insert /folder
+#RewriteRule ^(.*)$ ./tmp/$1 [L]
+#RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ tmp/$1 [L]
+
+#----------------------------------------------------
+# Enable the rewrite mod for this directory
+#RewriteEngine on
 
 # all inbound requests should be redirected to the Webroot folder and appended the URI to the path
-RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ Webroot/$1
+RewriteRule ^([a-zA-Z0-9\-\_\/]*)$ Webroute/$1 [L]

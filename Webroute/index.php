@@ -5,13 +5,12 @@
  * 
  * We compule the request and handle it using the dispatcher class
  */
-return "hello world!";
 
 // Define the start of the web route directory
-define('WEBROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_NAME"]));
+define('WEBROOT', str_replace("Webroute/index.php", "", $_SERVER["SCRIPT_NAME"]));
 
 // Define the start of the project directory
-define('ROOT', str_replace("Webroot/index.php", "", $_SERVER["SCRIPT_FILENAME"]));
+define('ROOT', str_replace("Webroute/index.php", "", $_SERVER["SCRIPT_FILENAME"]));
 
 // include configuration file ( Includes all base classes for the MVC)
 require(ROOT . 'Config/core.php');

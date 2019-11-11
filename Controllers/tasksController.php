@@ -5,9 +5,10 @@ class tasksController extends Controller
     {
         require(ROOT . 'Models/Task.php');
 
-        $tasks = new Task();
+        // $tasks = new Task();
 
-        $d['tasks'] = $tasks->showAllTasks();
+        // $d['tasks'] = $tasks->showAllTasks();
+        $d=[];
         $this->set($d);
         $this->render("index");
     }
