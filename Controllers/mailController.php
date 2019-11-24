@@ -6,18 +6,16 @@ class mailController extends Controller
     function index()
     {
         $this->authed();
-        
         require(ROOT . 'Models/Mail.php');
         $mail = new Mail();
         $results["mails"] = Mail::resultToArray($mail->inbox($_SESSION["user"]));
-        // $results["mails"] = $mail->inbox($_SESSION["user"]);
-        // var_dump($results,$_SESSION["user"]);
         $this->set($results);
         $this->render("index");
     }
 
     function create()
     {
+        $this->authed();
         // METHOD: POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             require(ROOT . 'Models/Mail.php');
@@ -38,6 +36,15 @@ class mailController extends Controller
         }
     }
 
+    function show($id)
+    {
+        $this->authed();
+        require(ROOT . 'Models/Mail.php');
+        $mail = new Mail();
+        $results["mail"] = Mail::resultToArray($mail->find($id))[0];
+        $this->set($results);
+        $this->render("show");
+    }
 
 }
 ?>

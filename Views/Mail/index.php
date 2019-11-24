@@ -12,14 +12,16 @@
 <table class="table table-dark">
   <thead>
     <tr>
-        <th>From</th>
+        <th>Id</th>
+        <th>From (user Id)</th>
         <th>Subject</th>
     </tr>
   </thead>
   <tbody>
     <?php foreach($mails as $key => $value): ?>
         <tr>
-            <td><a href="/mail/<?= $value["id"]?>"><?= $value["from_user_id"]?></a></td>
+            <td><a href="/mail/show/<?= $value["id"]?>"><?= $value["id"]?></a></td>
+            <td><?= $value["from_user_id"]?></td>
             <td><?= $value["subject"]?></td>
         </tr>
     <?php endforeach; ?>
