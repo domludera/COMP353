@@ -10,7 +10,6 @@ class Router
         $explode_url = explode('/', $url);
 
         if(isset($explode_url[1]) && $explode_url[1] != ""){
-            echo 1;
             $request->controller = $explode_url[1];
         } else{
             $request->controller = 'home';

@@ -1,3 +1,10 @@
+<?php
+    if(!isset($_SESSION)) 
+    { 
+        session_start(); 
+    } 
+?>
+
 <!doctype html>
 <head>
     <meta charset="utf-8">
@@ -21,19 +28,27 @@
 
 <body>
 <nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
-    <a class="navbar-brand" href="#">Comp 353 Final Project!</a>
+    <a class="navbar-brand" href="/">Comp 353 Final Project!</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
     </button>
 
     <div class="collapse navbar-collapse" id="navbarsExampleDefault">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <a class="nav-link" href="/">Home <span class="sr-only">(current)</span></a>
-            </li>
-            <li class="nav-item active">
-                <a class="nav-link" href="/tasks">Task Controller (tst) <span class="sr-only">(current)</span></a>
-            </li>
+            <?php if(isset($_SESSION['user']) && $_SESSION["user"]) : ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/home/home">Home</a>
+                </li>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/auth/logout">logout</a>
+                </li>
+            <?php endif; ?>
+
+            <?php if(!isset($_SESSION['user']) || !$_SESSION["user"]) : ?>
+                <li class="nav-item active">
+                    <a class="nav-link" href="/auth/login">Login</a>
+                </li>
+            <?php endif; ?>
         </ul>
     </div>
 </nav>
