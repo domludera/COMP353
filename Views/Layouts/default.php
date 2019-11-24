@@ -48,6 +48,10 @@
                 <li class="nav-item active">
                     <a class="nav-link" href="/auth/login">Login</a>
                 </li>
+                
+                <li class="nav-item active">
+                    <a class="nav-link" href="/auth/register">Register</a>
+                </li>
             <?php endif; ?>
         </ul>
     </div>

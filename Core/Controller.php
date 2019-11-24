@@ -72,5 +72,23 @@
             die();
         }
 
+        /**
+         * Middleware that checks if the user is logged in.
+         * If not, redirect to login page
+         */
+        function authed()
+        {
+            if(!isset($_SESSION)) 
+            { 
+                session_start(); 
+            } 
+
+            if(!isset($_SESSION['user']) || !$_SESSION['user']){
+                $this->redirect('/auth/login');
+            }
+
+            return true;
+        }
+
     }
 ?>
