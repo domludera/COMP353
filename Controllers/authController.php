@@ -16,7 +16,13 @@ class authController extends Controller
                 $parameters["region"],
                 $parameters["profession"]
             );
-            echo json_encode(User::resultToArray($results)[0]);
+            $result = User::resultToArray($results)[0];
+
+            session_start();
+            // Store user id (log them in)
+            $_SESSION['user'] = $result['id'];
+            // echo json_encode($result[0]);
+            $this->redirect("/home/home");
         }
         
         // METHOD: GET
