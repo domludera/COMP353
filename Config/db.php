@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Connection class. Will likely override using the PDO class from Assignment 1
+ * Connection class. Will likely override using the mysqli class from Assignment 1
  */
 class Database
 {
@@ -12,7 +12,8 @@ class Database
 
     public static function getBdd() {
         if(is_null(self::$bdd)) {
-            self::$bdd = new PDO("mysql:host=localhost;dbname=todo_php", 'root', 'root');
+            $dbConfigs = parse_ini_file('../Config/config.ini');
+            self::$bdd = new mysqli($dbConfigs['servername'], $dbConfigs['username'], $dbConfigs['password'], $dbConfigs['dbname']);
         }
         return self::$bdd;
     }

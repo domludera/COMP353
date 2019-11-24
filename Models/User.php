@@ -1,0 +1,96 @@
+<?php
+class User extends Model
+{
+    
+    /**
+     * Find a given record by its ID
+     */
+    public function find($id)
+    {
+        if(!$id){
+            return $id;
+        };
+        $sql = "SELECT * FROM users WHERE id=?;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bind_param(
+            "i", // tells you what type the vars will be (check php docs for more info)
+            $id
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    /**
+     * Create new user TODO:: Check if email already in use
+     */
+    public function create($email, $password, $dob, $region, $profession)
+    {
+        $now = date('Y-m-d H:i:s');
+
+        $sql = "INSERT INTO users 
+                (email, password, dob, region, profession, created_at, updated_at) 
+                VALUES (?, ?, ?, ?, ?, ?, ?);";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bind_param(
+            "sssssss", // tells you what type the vars will be (check php docs for more info)
+            $email,
+            $password,
+            $dob,
+            $region,
+            $profession,
+            $now,
+            $now
+        );
+        $stmt->execute();
+        $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
+        $stmt->close();
+
+        return $this->find($insertedId);
+    }
+    
+    /**
+     * Create new user TODO:: Check if email already in use
+     */
+    public function byEmail($email)
+    {
+        
+        $sql = "SELECT * FROM users WHERE email=?;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bind_param(
+            "s", // tells you what type the vars will be (check php docs for more info)
+            $email
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    /**
+     * Validatew credentials
+     */
+    public function validate($email, $password)
+    {
+        $sql = "SELECT * FROM users WHERE email=? AND password = ?;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bind_param(
+            "ss", // tells you what type the vars will be (check php docs for more info)
+            $email,
+            $password
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+}
+?>

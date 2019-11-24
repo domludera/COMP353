@@ -63,5 +63,14 @@
             }
         }
 
+        /**
+         * Redirect the user to a location
+         */
+        function redirect($url, $statusCode = 303)
+        {
+            header('Location: ' . $url, true, $statusCode);
+            die();
+        }
+
     }
 ?>
