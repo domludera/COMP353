@@ -1,6 +1,7 @@
 /*
  Create the database & use it
 */
+DROP SCHEMA comp353;
 CREATE SCHEMA comp353;
 USE comp353;
 
@@ -161,7 +162,7 @@ CREATE TABLE mails (
 );
 -- Many-to-Manys
 
-------------------- Sample Section ------------------------
+/*------------------ Sample Section -----------------------*/
 /*
  Section
 */
