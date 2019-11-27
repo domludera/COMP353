@@ -37,9 +37,6 @@ class Mail extends Model
         return $stmt->get_result();
     }
 
-    /**
-     * Create new user TODO:: Check if email already in use
-     */
     public function create($from,$to,$subject,$content)
     {
         $sql = "INSERT INTO mails 

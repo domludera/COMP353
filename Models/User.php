@@ -74,7 +74,7 @@ class User extends Model
     }
 
     /**
-     * Validatew credentials
+     * Validate credentials
      */
     public function validate($email, $password)
     {
