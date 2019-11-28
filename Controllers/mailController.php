@@ -20,6 +20,7 @@ class mailController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             require(ROOT . 'Models/Mail.php');
             $user = new Mail();
+
             $results = $user->create(
                 $_SESSION["user"],
                 $_POST["to"],

@@ -42,27 +42,27 @@ class Mail extends Model
      */
     public function create($from,$to,$subject,$content)
     {
-        $sql = "INSERT INTO mails 
+            $sql = "INSERT INTO mails 
                 (from_user_id ,to_user_id ,subject , content) 
                 VALUES (?, ?, ?, ?);";
 
-        $conn = Database::getBdd();
-        $stmt = $conn->prepare($sql);
+            $conn = Database::getBdd();
+            $stmt = $conn->prepare($sql);
 
-        echo mysqli_error($conn);
+            echo mysqli_error($conn);
 
-        $stmt->bind_param(
-            "iiss", // tells you what type the vars will be (check php docs for more info)
-            $from,
-            $to,
-            $subject,
-            $content
-        );
-        $stmt->execute();
-        $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
-        $stmt->close();
+            $stmt->bind_param(
+                "iiss", // tells you what type the vars will be (check php docs for more info)
+                $from,
+                $to,
+                $subject,
+                $content
+            );
+            $stmt->execute();
+            $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
+            $stmt->close();
 
-        return $this->find($insertedId);
+            return $this->find($insertedId);
     }
 
 }
