@@ -41,3 +41,4 @@ therefore in groupController.index(),
 //TODO
 
 create form in group for "name" -> groupName defined by user
+create file "create.php" -> for group creation (see Mail/create for ref)

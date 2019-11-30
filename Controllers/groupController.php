@@ -19,9 +19,16 @@ class groupController extends Controller
             require(ROOT . 'Models/Group.php');
             $user = new Group();
 
-            $results = $user->createGroup(
+            $user->createGroup(
                 $_POST["groupname"],
-                $_SESSION["user"]
+                $_SESSION["user"],
+                $_POST["event_name"]
+            );
+            $group = new Group();
+            $groupId = Group::resultToArray($group->getLastGroupId())[0];
+            $user->addEventGroup(
+                $_POST['event_name'],
+                $groupId["MAX(id)"]
             );
 
             $this->redirect("/group");
@@ -30,6 +37,26 @@ class groupController extends Controller
         if ($_SERVER['REQUEST_METHOD'] == "GET"){
             $this->render("create");
         }
+    }
+
+    function join(){
+        $this->authed();
+        if($_SERVER['REQUEST_METHOD'] == 'POST'){
+            require(ROOT . 'Models/Group.php');
+            $user = new Group();
+
+            $user->joinGroup(
+                $_SESSION["user"],
+                $_POST["groupid"]
+            );
+
+            $this->redirect("/group");
+        }
+
+        if ($_SERVER['REQUEST_METHOD'] == "GET"){
+            $this->render("join");
+        }
+
     }
 
 }

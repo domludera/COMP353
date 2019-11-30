@@ -30,9 +30,58 @@ class Group extends Model
             $owner
         );
         $stmt->execute();
-        $insertedId = $stmt->insert_id;
         $stmt->close();
 
-        return $this->find($insertedId);
     }
+
+    public function getLastGroupId(){
+        $sql = "SELECT MAX(id) FROM groups;";
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        echo mysqli_error($conn);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    public function connectDB($sql){
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        echo mysqli_error($conn);
+
+        return $stmt;
+    }
+
+    public function execSQL($stmt){
+        $stmt->execute();
+        $stmt->close();
+    }
+
+    public function joinGroup($userId, $groupid){
+        $sql = "INSERT INTO user_group (user_id, group_id) VALUE (?, ?);";
+        $stmt = $this->connectDB($sql);
+        $stmt->bind_param(
+            "ii",
+            $userId,
+            $groupid
+        );
+        $this->execSQL($stmt);
+    }
+
+    public function addEventGroup($event, $groupid){
+        $sql = "INSERT INTO event_group (event_id, group_id) VALUES (?, ?);";
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        echo mysqli_error($conn);
+
+        $stmt->bind_param(
+            "ii",
+            $event,
+            $groupid
+        );
+        $stmt->execute();
+        $stmt->close();
+
+    }
+
 }
