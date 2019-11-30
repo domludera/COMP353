@@ -12,7 +12,7 @@ class Router
         if(isset($explode_url[1]) && $explode_url[1] != ""){
             $request->controller = $explode_url[1];
         } else{
-            $request->controller = 'home';
+            $request->controller = 'index';
         }
 
 

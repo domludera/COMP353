@@ -1,4 +1,5 @@
 <?php
+session_start();
 class homeController extends Controller
 {
     function index()
@@ -8,12 +9,13 @@ class homeController extends Controller
 
     function home()
     {
-        session_start();
-        if($_SESSION["user"]){
+        //session_start();
+        //if($_SESSION["user"]){
             $this->render("home");
-        } else{
-            $this->redirect("/auth/login");
-        }
+        //} else{
+            //$this->redirect("/auth/login");
+		//	$this->redirect("/");
+       //}
     }
 }
 ?>
