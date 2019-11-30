@@ -7,6 +7,7 @@ class Mail extends Model
      */
     public function find($id)
     {
+        
         if(!$id){
             return $id;
         };
@@ -19,10 +20,32 @@ class Mail extends Model
             "i", // tells you what type the vars will be (check php docs for more info)
             $id
         );
+        
         $stmt->execute();
+        //var_dump($stmt->get_result());exit;
         return $stmt->get_result();
     }
 
+	public function findAll($id)
+    {        
+        if(!$id){
+            return $id;
+        };
+        $sql = "SELECT * FROM mails WHERE to_user_id=?;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->bind_param(
+            "i", // tells you what type the vars will be (check php docs for more info)
+            $id
+        );
+        
+        $stmt->execute();
+        //var_dump($stmt->get_result());exit;
+        return $stmt->get_result();
+    }
+	
     public function inbox($userId){
         $sql = "SELECT * FROM mails WHERE to_user_id = ?;";
 

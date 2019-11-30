@@ -27,7 +27,8 @@ class authController extends Controller
         
         // METHOD: GET
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            $this->render("register");
+            //$this->render("register");
+			$this->redirect("/");
         }
     }
 
@@ -58,7 +59,8 @@ class authController extends Controller
         
         // METHOD: GET
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
-            $this->render("login");
+            //$this->render("login");
+			$this->redirect("/");
         }
     }
 
@@ -71,7 +73,8 @@ class authController extends Controller
             //     "message" => "logged out successfully!",
             //     "error" => false
             // ]);
-            $this->redirect("/auth/login");
+            //$this->redirect("/auth/login");
+			$this->redirect("/");
         } else{
             echo json_encode([
                 "message" => "Not logged in!",
