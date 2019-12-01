@@ -26,7 +26,7 @@ class groupController extends Controller
             );
             $group = new Group();
             $groupId = Group::resultToArray($group->getLastGroupId())[0];
-            $user->addEventGroup(
+            $user->addToEvent(
                 $_POST['event_name'],
                 $groupId["MAX(id)"]
             );

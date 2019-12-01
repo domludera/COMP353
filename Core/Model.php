@@ -11,5 +11,19 @@
             }
             return $compiled;
         }
+
+
+        public function connectDB($sql){
+            $conn = Database::getBdd();
+            $stmt = $conn->prepare($sql);
+            echo mysqli_error($conn);
+
+            return $stmt;
+        }
+
+        public function execSQL($stmt){
+            $stmt->execute();
+            $stmt->close();
+        }
     }
 ?>
