@@ -1,0 +1,44 @@
+
+
+A participant can create a new group and hence become the manager of the group,
+invite other participants of the events to join the group and admit those participants
+who apply to join the group; post new items for the group. The group pages are not
+accessible to anyone other than the group members; however any participant of the main
+event can request to join a group. Membership of a group is visible to all members of
+the group and they can send private communication or comments to another member
+in the group. NO access is allowed to the group contents to participants not members
+of the group.
+
+
+Details about groups: Records of information on each group, owner of the group, list of
+participants belonging to the group(group members). Owner of the group can add new
+members or remove members from the group. Members of a group can share a forum of
+information such as photos, videos and posts. Adding any member into a group requires
+the knowledge of the person’s SCC ID, email address, first name and DOB.
+
+
+
+
+from HOME/home.php
+GET /group -> groupController.index() => render(Views/Group/index)
+
+- remember to check SQL with groups
+
+Assumptions
+
+$mails comes from mailController.index(), its init line11 by $results["mails"] = Mail::result...
+								$this->set($results);
+
+therefore in groupController.index(),
+	$groups should be generated in a simil fashion
+		$group = new Group();
+		$group->partOf($_SESSION["user"]) => Group::resultToArray()
+			assign ^ to $results["groups"];
+		$this->set($results);
+
+
+
+//TODO
+
+create form in group for "name" -> groupName defined by user
+create file "create.php" -> for group creation (see Mail/create for ref)
