@@ -7,14 +7,15 @@
       </div>
     </div>
   </div>
-<<<<<<< HEAD
-    <div class="card-body">
-        <h5 class="card-title">Groups</h5>
-        <p class="card-text">My Groups</p>
-        <a href="/group" class="btn btn-primary">View</a>
-    </div>
-</div>
-=======
+  <div class="col-md-6 col-sm-12">
+	<div class="card" style="width: 18rem;">
+		<div class="card-body">
+			<h5 class="card-title">Groups</h5>
+			<p class="card-text">My Groups</p>
+			<a href="/group" class="btn btn-primary">View</a>
+		</div>
+	</div>
+	</div>
   <div class="col-md-6 col-sm-12">
     <div class="card" style="width: 18rem;">
       <div class="card-body">
@@ -24,4 +25,4 @@
     </div>
   </div>
 </div>
->>>>>>> afe23968ca832a0571135df02845e8c41b42e6b1
+

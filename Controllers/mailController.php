@@ -49,9 +49,6 @@ class mailController extends Controller {
     }
 
 }
-<<<<<<< HEAD
-?>
-=======
 
 ?>
->>>>>>> afe23968ca832a0571135df02845e8c41b42e6b1
+

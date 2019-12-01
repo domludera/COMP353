@@ -53,7 +53,8 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
       <!-- Heading -->
       <div class="sidebar-heading" style="text-align:center">
         Dashboard
-      </div><!-- Nav Item - Pages Collapse Menu -->
+      </div>
+	  <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><i class="fas fa-fw fa-star"></i> <span>Events</span></a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -61,19 +62,23 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
             <h6 class="collapse-header">My Events:</h6><a class="collapse-item" href="/event">Active</a> <a class="collapse-item" href="/event/archived">Archived</a>
           </div>
         </div>
-      </li><!-- Nav Item - Utilities Collapse Menu -->
+      </li>
+	  <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/groups"><i class="fas fa-fw fa-users"></i> <span>Groups</span></a>
-      </li><!--IF SYSTEM ADMIN-->
+        <a class="nav-link collapsed" href="/group"><i class="fas fa-fw fa-users"></i> <span>Groups</span></a>
+      </li>
+	  <!--IF SYSTEM ADMIN-->
       <!-- Divider -->
       <hr class="sidebar-divider" />
       <!-- Heading -->
       <div class="sidebar-heading" style="text-align:center">
         Admin
-      </div><!-- Nav Item - Pages Collapse Menu -->
+      </div>
+	  <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link" href="/event"><i class="fas fa-fw fa-cog"></i> <span>Configuration</span></a>
-      </li><!-- Nav Item - Pages Collapse Menu -->
+      </li>
+	  <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTo" aria-expanded="true" aria-controls="collapseTo"><i class="fas fa-fw fa-cog"></i> <span>Events</span></a>
         <div id="collapseTo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
@@ -81,8 +86,10 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
             <h6 class="collapse-header">Select:</h6><a class="collapse-item" href="/event/create">Create</a> <a class="collapse-item" href="/event/edit">Edit</a>
           </div>
         </div>
-      </li><!--END IF SYSTEM ADMIN-->
-      <?php endif; ?><!--IF NOT SIGNED IN NAV SIDE BAR-->
+      </li>
+	  <!--END IF SYSTEM ADMIN-->
+      <?php endif; ?>
+	  <!--IF NOT SIGNED IN NAV SIDE BAR-->
       <?php if (!isset($_SESSION['user']) || !$_SESSION["user"]) : ?><!-- Sidebar - Brand -->
        <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
       <div class="sidebar-brand-icon rotate-n-15">
@@ -92,7 +99,8 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
         Welcome!
       </div></a>
       <hr class="sidebar-divider my-0" />
-      <div class="sidebar-heading"></div><!-- Nav Item - Pages Collapse Menu -->
+      <div class="sidebar-heading"></div>
+	  <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><span>Description of project details goes here.</span></a> <?php endif; ?> <!-- Divider -->
         <hr class="sidebar-divider my-0" />
@@ -101,7 +109,8 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
           <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
       </li>
-    </ul><!-- End of Sidebar -->
+    </ul>
+	<!-- End of Sidebar -->
     <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
       <!-- Main Content -->
@@ -117,7 +126,8 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
                 <button class="btn btn-primary" type="button"><i class="fas fa-search fa-sm"></i></button>
               </div>
             </div>
-          </form><!--IF SIGNED IN NAV TOP BAR-->
+          </form>
+		  <!--IF SIGNED IN NAV TOP BAR-->
           <?php if (isset($_SESSION['user']) && $_SESSION["user"]) : ?><!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -133,11 +143,13 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
                   </div>
                 </form>
               </div>
-            </li><!-- Nav Item - Alerts -->
+            </li>
+			<!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell fa-fw"></i> <!-- Counter - Alerts -->
                <span class="badge badge-danger badge-counter"><?= count($results["mail"]); ?>
-              </span></a> <!-- Dropdown - Alerts -->
+              </span></a> 
+			  <!-- Dropdown - Alerts -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="alertsDropdown">
                 <h6 class="dropdown-header">Alerts Center</h6><a class="dropdown-item d-flex align-items-center" href="#">
                 <div class="mr-3">
@@ -171,10 +183,12 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
                   </div>Event3: PersonX has shared a photo!
                 </div></a> <a class="dropdown-item text-center small text-gray-500" href="#">Show All Alerts</a>
               </div>
-            </li><!-- Nav Item - Messages -->
+            </li>
+			<!-- Nav Item - Messages -->
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="messagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-envelope fa-fw"></i> <!-- Counter - Messages --> <span class="badge badge-danger badge-counter"><?= count($results["mail"]); ?>
-              </span></a> <!-- Dropdown - Messages -->
+              </span></a> 
+			  <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
                 <h6 class="dropdown-header">Mail Center</h6><a class="dropdown-item d-flex align-items-center" href="/mail/show/4">
                 <div class="dropdown-list-image mr-3">
@@ -189,7 +203,8 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
                 </div></a> <a class="dropdown-item text-center small text-gray-500" href="/mail">Read More Messages</a>
               </div>
             </li>
-            <div class="topbar-divider d-none d-sm-block"></div><!-- Nav Item - User Information -->
+            <div class="topbar-divider d-none d-sm-block"></div>
+			<!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2 d-none d-lg-inline text-gray-600 small">Priscilla</span> <img class="img-profile rounded-circle" src="/Bootstrap/img/Portrait_Placeholder.png" /></a> <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
@@ -197,7 +212,8 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
                 <div class="dropdown-divider"></div><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout</a>
               </div>
             </li>
-          </ul><?php endif; ?><!--IF NOT SIGNED IN NAV TOP BAR-->
+          </ul><?php endif; ?>
+		  <!--IF NOT SIGNED IN NAV TOP BAR-->
           <?php if (!isset($_SESSION['user']) || !$_SESSION["user"]) : ?><!-- Topbar Navbar -->
           <ul class="navbar-nav ml-auto">
             <!-- Nav Item - Search Dropdown (Visible Only XS) -->
@@ -213,7 +229,8 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
                   </div>
                 </form>
               </div>
-            </li><!-- Nav Item - Alerts -->
+            </li>
+			<!-- Nav Item - Alerts -->
             <li class="nav-item dropdown no-arrow mx-1">
               <a class="nav-link dropdown-toggle" href="#" id="alertsDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fas fa-bell fa-fw"></i> <!-- Counter - Alerts -->
                <span class="badge badge-danger badge-counter"></span></a> <!-- Nav Item - Messages -->
@@ -227,16 +244,18 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2 d-none d-lg-inline text-gray-600 small"></span> <img class="img-profile rounded-circle" src="/Bootstrap/img/Portrait_Placeholder.png" /></a>
             </li>
           </ul><?php endif; ?>
-        </nav><!-- End of Topbar -->
+        </nav>
+		<!-- End of Topbar -->
         <!-- Begin Page Content -->
         <main role="main" class="container">
           <div class="container-fluid">
             <?php
-                                    echo $content_for_layout;
-                                    ?>
+				echo $content_for_layout;
+			?>
           </div>
         </main>
-      </div><!-- End of Main Content -->
+      </div>
+	  <!-- End of Main Content -->
       <!-- Footer -->
       <footer class="sticky-footer bg-white">
         <div class="container my-auto">
@@ -244,9 +263,12 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
             <span>Comp 353 - Fall 2019</span>
           </div>
         </div>
-      </footer><!-- End of Footer -->
-    </div><!-- End of Content Wrapper -->
-  </div><!-- End of Page Wrapper -->
+      </footer>
+	  <!-- End of Footer -->
+    </div>
+	<!-- End of Content Wrapper -->
+  </div>
+  <!-- End of Page Wrapper -->
   <!-- Scroll to Top Button-->
    <a class="scroll-to-top rounded" href="#page-top"><i class="fas fa-angle-up"></i></a> <!-- Logout Modal-->
   <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
