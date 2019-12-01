@@ -1,4 +1,4 @@
-<form action="/group/create" method="get">
+<form action="/group/create/" method="get">
     <button type="submit" class="btn btn-primary">Create Group</button>
 </form>
 
@@ -32,7 +32,7 @@
 <?php if(!$groups || count($groups) == 0) : ?>
     You haven't joined any groups yet!
 <?php endif; ?>
-<form action="/group/join" method="get">
+<form action="/group/join/" method="get">
     <button type="submit" class="btn btn-primary">Join Group</button>
 </form>
 
