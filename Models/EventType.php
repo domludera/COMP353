@@ -37,7 +37,6 @@ class EventType extends Model
      */
     public function create($name)
     {
-        // var_dump($reoccuring);
         $sql = "INSERT INTO event_types 
                 (name) 
                 VALUES (?);";

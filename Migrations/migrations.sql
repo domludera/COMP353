@@ -61,12 +61,14 @@ CREATE TABLE events
     start_at      Date,
     end_at        Date,
     reoccuring    Bool,
+    manager_id    int,
 
-    FOREIGN KEY (event_type_id) REFERENCES event_types (id)
+    FOREIGN KEY (event_type_id) REFERENCES event_types (id),
+    FOREIGN KEY (manager_id) REFERENCES users (id)
 );
 
 -- Many-to-Manys
-CREATE TABLE user_event
+CREATE TABLE user_attending
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     user_id  int,

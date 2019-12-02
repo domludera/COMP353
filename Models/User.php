@@ -1,7 +1,17 @@
 <?php
 class User extends Model
 {
-    
+    public function list()
+    {
+        $sql = "SELECT id, email FROM users;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     /**
      * Find a given record by its ID
      */

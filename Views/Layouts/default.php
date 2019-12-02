@@ -13,7 +13,6 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
     $mails = new Mail();
     $results["mail"] = Mail::resultToArray($mails->findAll($id));
     $this->set($results);
-    //var_dump($results);exit;
 }
 ?>
 <!DOCTYPE html>
@@ -29,6 +28,21 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
   <link href="/Bootstrap/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css" />
   <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" /><!-- Custom styles for this template-->
   <link href="/Bootstrap/css/sb-admin-2.min.css" rel="stylesheet" />
+
+  <!-- Js Files -->
+  <!-- Bootstrap core JavaScript-->
+  <script src="/Bootstrap/vendor/jquery/jquery.min.js"></script> 
+  <script src="/Bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> <!-- Core plugin JavaScript-->
+   
+  <script src="/Bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script> <!-- Custom scripts for all pages-->
+   
+  <script src="/Bootstrap/js/sb-admin-2.min.js"></script> <!-- Page level plugins -->
+   
+  <script src="/Bootstrap/vendor/datatables/jquery.dataTables.min.js"></script> 
+  <script src="/Bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script> <!-- Page level custom scripts -->
+   
+  <script src="/Bootstrap/js/demo/datatables-demo.js"></script>
+
 </head>
 <body id="page-top">
   <!-- Page Wrapper -->
@@ -59,7 +73,10 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><i class="fas fa-fw fa-star"></i> <span>Events</span></a>
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">My Events:</h6><a class="collapse-item" href="/event">Active</a> <a class="collapse-item" href="/event/archived">Archived</a>
+            <h6 class="collapse-header">My Events:</h6>
+            <a class="collapse-item" href="/event">Active</a>
+            <a class="collapse-item" href="/event/attending">Attending</a>
+            <a class="collapse-item" href="/event/managing">Managing</a>
           </div>
         </div>
       </li>
@@ -285,17 +302,6 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
         </div>
       </div>
     </div>
-  </div><!-- Bootstrap core JavaScript-->
-  <script src="/Bootstrap/vendor/jquery/jquery.min.js"></script> 
-  <script src="/Bootstrap/vendor/bootstrap/js/bootstrap.bundle.min.js"></script> <!-- Core plugin JavaScript-->
-   
-  <script src="/Bootstrap/vendor/jquery-easing/jquery.easing.min.js"></script> <!-- Custom scripts for all pages-->
-   
-  <script src="/Bootstrap/js/sb-admin-2.min.js"></script> <!-- Page level plugins -->
-   
-  <script src="/Bootstrap/vendor/datatables/jquery.dataTables.min.js"></script> 
-  <script src="/Bootstrap/vendor/datatables/dataTables.bootstrap4.min.js"></script> <!-- Page level custom scripts -->
-   
-  <script src="/Bootstrap/js/demo/datatables-demo.js"></script>
+  </div>
 </body>
 </html>

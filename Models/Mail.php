@@ -22,7 +22,6 @@ class Mail extends Model
         );
         
         $stmt->execute();
-        //var_dump($stmt->get_result());exit;
         return $stmt->get_result();
     }
 
@@ -42,7 +41,6 @@ class Mail extends Model
         );
         
         $stmt->execute();
-        //var_dump($stmt->get_result());exit;
         return $stmt->get_result();
     }
 	
