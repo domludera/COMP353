@@ -1,8 +1,5 @@
-<form action="/event/create/" method="get">
-  <button type="submit" class="btn btn-primary">New Event</button>
-</form>
 <hr />
-<h1>All events</h1><!-- Have Mail Pending -->
+<h1>Managing event</h1><!-- Have Mail Pending -->
 <?php if($events && count($events) > 0) : ?>
 <table class="table table-dark">
   <thead>
