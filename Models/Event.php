@@ -80,6 +80,24 @@ class Event extends Model
         return $stmt->get_result();
     }
 
+    
+    /**
+     * Groups Section
+     */
+    public function groups($eventId){
+        $sql = "SELECT * FROM event_group
+            join groups on event_group.group_id=groups.id
+            WHERE event_id=?;";
+
+        $stmt = $this->connectDB($sql);
+        $stmt->bind_param(
+            "i",
+            $eventId
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     /**
      * Attendance Section
      */

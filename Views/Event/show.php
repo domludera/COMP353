@@ -19,6 +19,18 @@
       <input id="id" type="checkbox" name="reoccuring" disabled="disabled" />
   <?php endif; ?>
 </div>
+<hr>
+
+<h2>Event Groups</h2>
+<a class="btn btn-primary col-12" href="/group/create/<?= $event["id"]?>" role="button">New</a>
+<ul class="list-group">
+  <?php foreach($groups as $key => $group): ?>
+    <a href="/group/show/<?= $group["id"]?>"><li class="list-group-item"><?= $group["name"]?></li></a>
+  <?php endforeach; ?>
+</ul>
+
+<hr>
+
 <h2>Attendees</h2>
 <ul class="list-group">
   <?php foreach($attendees as $key => $user): ?>

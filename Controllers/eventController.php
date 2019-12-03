@@ -62,9 +62,15 @@ class eventController extends Controller
     {
         $this->authed();
         require(ROOT . 'Models/Event.php');
+        require(ROOT . 'Models/Group.php');
         $event = new Event();
+        $group = new Group();
         $results["event"] = Event::resultToArray($event->find($id))[0];
         $results["attendees"] = Event::resultToArray($event->attendees($results["event"]["id"]));
+
+        $results["groups"] = Event::resultToArray($event->groups($results["event"]["id"]));
+        
+
         $this->set($results);
         $this->render("show");
     }
