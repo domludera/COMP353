@@ -5,7 +5,7 @@
     <div id="Info">
         <p>
             <strong>Name:</strong>
-            <span><?php $user['name']?></span>
+            <span><?= $user['name']?></span>
         </p>
         <p>
             <strong>Email:</strong>

@@ -41,7 +41,7 @@ class User extends Model
         $now = date('Y-m-d H:i:s');
 
         $sql = "INSERT INTO users 
-                (email, name, password, dob, region, profession, created_at, updated_at) 
+                (email, password, name, dob, region, profession, created_at, updated_at) 
                 VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         $conn = Database::getBdd();
