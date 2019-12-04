@@ -12,6 +12,7 @@ class authController extends Controller
             $results = $user->create(
                 $parameters["email"],
                 $parameters["password"],
+                $parameters["name"],
                 $parameters["dob"],
                 $parameters["region"],
                 $parameters["profession"]
