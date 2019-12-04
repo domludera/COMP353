@@ -1,7 +1,7 @@
 <?php
 
 // Define the start of the project directory
-if(strpos(php_uname, 'Linux') !== false){
+if(strpos(php_uname(), 'Linux') !== false){
 	define('ROOT', getcwd() . "/../");
 }else{
 	define('ROOT', getcwd() . "\\..\\");
