@@ -1,7 +1,11 @@
 <?php
 
 // Define the start of the project directory
-define('ROOT', getcwd() . "\\..\\");
+if(strpos(php_uname, 'Linux') !== false){
+	define('ROOT', getcwd() . "/../");
+}else{
+	define('ROOT', getcwd() . "\\..\\");
+}
 
 // include configuration file ( Includes all base classes for the MVC)
 require(ROOT . 'Config/core.php');
