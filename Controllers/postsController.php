@@ -8,7 +8,7 @@ class postsController extends Controller
         $this->authed();
         // METHOD: POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            require(ROOT . 'Models/Post.php');
+            require_once(ROOT . 'Models/Post.php');
             $post = new Post();
             $results = $post->create(
                 $_POST["group_id"],
@@ -24,7 +24,7 @@ class postsController extends Controller
     function show($id)
     {
         $this->authed();
-        require(ROOT . 'Models/Post.php');
+        require_once(ROOT . 'Models/Post.php');
         $post = new Post();
         $results["post"] = Post::resultToArray($post->find($id))[0];
         $this->set($results);

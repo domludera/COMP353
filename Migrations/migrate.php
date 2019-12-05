@@ -24,6 +24,7 @@ $command = 'mysql'
 shell_exec($command);
 
 // Call seeding files
+include 'PrivilegeSeed.php';
 include 'EventTypesSeed.php';
 include 'UserSeed.php';
 include 'InterestsSeed.php';

@@ -6,7 +6,7 @@ class groupsController extends Controller
 
     function index(){
         $this->authed();
-        require(ROOT . 'Models/Group.php');
+        require_once(ROOT . 'Models/Group.php');
         $group = new Group();
         $results["groups"] = Group::resultToArray($group->partOf($_SESSION["user"]));
         $this->set($results);
@@ -16,8 +16,8 @@ class groupsController extends Controller
     function show($id)
     {
         $this->authed();
-        require(ROOT . 'Models/Group.php');
-        require(ROOT . 'Models/User.php');
+        require_once(ROOT . 'Models/Group.php');
+        require_once(ROOT . 'Models/User.php');
         $group = new Group();
         $results["group"] = Group::resultToArray($group->find($id))[0];
         $results["members"] = Group::resultToArray($group->members($results["group"]["id"]));
@@ -35,7 +35,7 @@ class groupsController extends Controller
     function create($eventId = null){
         $this->authed();
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            require(ROOT . 'Models/Group.php');
+            require_once(ROOT . 'Models/Group.php');
             $group = new Group();
 
             $groupResult = Group::resultToArray($group->create(
@@ -62,7 +62,7 @@ class groupsController extends Controller
         }
 
         if ($_SERVER['REQUEST_METHOD'] == "GET"){
-            require(ROOT . 'Models/User.php');
+            require_once(ROOT . 'Models/User.php');
             $results = ['eventId' => $eventId];
 
             $users = new User();
@@ -76,7 +76,7 @@ class groupsController extends Controller
     function join(){
         $this->authed();
         if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            require(ROOT . 'Models/Group.php');
+            require_once(ROOT . 'Models/Group.php');
             $group = new Group();
 
             $group->join(
