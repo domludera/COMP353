@@ -8,7 +8,7 @@ class commentsController  extends Controller
         $this->authed();
         // METHOD: POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            require(ROOT . 'Models/Comment.php');
+            require_once(ROOT . 'Models/Comment.php');
             $comment = new Comment();
             $results = $comment->create(
                 $_POST["post_id"],
@@ -24,7 +24,7 @@ class commentsController  extends Controller
     function show($id)
     {
         $this->authed();
-        require(ROOT . 'Models/Comment.php');
+        require_once(ROOT . 'Models/Comment.php');
         $comment = new Comment();
         $results["comment"] = Comment::resultToArray($comment->find($id))[0];
         $this->set($results);

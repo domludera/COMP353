@@ -29,6 +29,11 @@ CREATE TABLE users
     created_at Date,
     updated_at Date
 );
+CREATE TABLE privileges
+(
+    id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name       CHAR(255)
+);
 
 -- Many-to-Manys
 CREATE TABLE user_interest
@@ -40,6 +45,17 @@ CREATE TABLE user_interest
     -- fkeys
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (interest_id) REFERENCES interests (id)
+);
+
+CREATE TABLE user_privilege
+(
+    id          int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    user_id     int,
+    privilege_id int,
+
+    -- fkeys
+    FOREIGN KEY (user_id) REFERENCES users (id),
+    FOREIGN KEY (privilege_id) REFERENCES privileges (id)
 );
 
 /*

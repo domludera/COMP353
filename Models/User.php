@@ -103,5 +103,28 @@ class User extends Model
         return $stmt->get_result();
     }
 
+    public function isAdmin($userId){
+        if (!class_exists('Privilege')) {
+            require(ROOT . 'Models/Privilege.php');
+        }
+
+        $user = User::resultToArray($this->find($userId))[0];
+
+        $privilegeManager = new Privilege();
+        $adminPriv = Privilege::resultToArray($privilegeManager->byName('admin'))[0];
+        return $privilegeManager->has($adminPriv['id'],$user["id"]);
+    }
+
+    public function isController($userId){
+        if (!class_exists('Privilege')) {
+            require(ROOT . 'Models/Privilege.php');
+        }
+
+        $user = User::resultToArray($this->find($userId))[0];
+
+        $privilegeManager = new Privilege();
+        $controllerPriv = Privilege::resultToArray($privilegeManager->byName('controller'))[0];
+        return $privilegeManager->has($controllerPriv['id'],$user["id"]);
+    }
 }
 ?>

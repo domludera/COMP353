@@ -6,7 +6,7 @@ class usersController extends Controller
     function index()
     {
         $this->authed();
-        require(ROOT . 'Models/User.php');
+        require_once(ROOT . 'Models/User.php');
         $user = new User();
         $results["user"] = User::resultToArray($user->all())[0];
         $this->set($results);
@@ -16,7 +16,7 @@ class usersController extends Controller
     function self()
     {
         $this->authed();
-        require(ROOT . 'Models/User.php');
+        require_once(ROOT . 'Models/User.php');
         $user = new User();
         $results["user"] = User::resultToArray($user->find($_SESSION["user"]))[0];
         $this->set($results);
