@@ -20,7 +20,15 @@
     <div class="card" style="width: 18rem;">
       <div class="card-body">
         <h5 class="card-title">Events</h5>
-        <p class="card-text">Event List</p><a href="/events" class="btn btn-primary">Proceed</a>
+        <p class="card-text">Upcomming Events</p>
+		<?php foreach($currentEvents as $key => $value): ?>
+			<a href="/events/show/<?= $value["id"]?>">
+				<strong><?= $value["name"]?></strong>
+			</a>
+			<?= $value["start_at"]?>
+		<p></p>
+		<?php endforeach; ?>
+		<a href="/events" class="btn btn-primary">All Events</a>
       </div>
     </div>
   </div>

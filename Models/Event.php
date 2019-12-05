@@ -155,5 +155,28 @@ class Event extends Model
         $stmt->execute();
         return $stmt->get_result();
     }
+	
+	//Finds all events for a user over the next $days days
+    public function attendingSoon($userId, $days){
+        $sql = "SELECT events.*, event_types.name as type FROM events 
+            join event_types on events.event_type_id=event_types.id
+            WHERE events.id in (
+                select event_id from user_attending where user_id = ?
+            )
+			AND events.start_at >= CURDATE()
+			AND events.start_at <= CURDATE() + ?
+			ORDER BY events.start_at;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "is", // tells you what type the vars will be (check php docs for more info)
+            $userId,
+			$days
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+    }
 }
 ?>
