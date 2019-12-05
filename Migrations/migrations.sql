@@ -1,9 +1,9 @@
 /*
  Create the database & use it
 */
-DROP SCHEMA comp353;
-CREATE SCHEMA comp353;
-USE comp353;
+DROP SCHEMA trc353_2;
+CREATE SCHEMA trc353_2;
+USE trc353_2;
 
 /*
  User

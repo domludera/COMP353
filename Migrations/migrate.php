@@ -19,11 +19,10 @@ $command = 'mysql'
         . ' --host=' . $dbConfigs['servername']
         . ' --user=' . $dbConfigs['username']
         . ' --password=' . $dbConfigs['password']
-        . ' --execute="SOURCE ' . $script_path
-;
+        . ' --execute="SOURCE ' . $script_path . '"';
 
 shell_exec($command);
 
 // Call seeding files
-include 'EventTypesSeed.php';
-include 'UserSeed.php';
+//include 'EventTypesSeed.php';
+//include 'UserSeed.php';
