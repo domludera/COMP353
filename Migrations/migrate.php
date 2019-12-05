@@ -26,3 +26,4 @@ shell_exec($command);
 // Call seeding files
 include 'EventTypesSeed.php';
 include 'UserSeed.php';
+include 'InterestsSeed.php';

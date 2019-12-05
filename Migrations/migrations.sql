@@ -22,6 +22,7 @@ CREATE TABLE users
     id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     email      CHAR(255),
     password   CHAR(255),
+    name       CHAR(255),
     dob        DATE,
     region     CHAR(255),
     profession CHAR(255),

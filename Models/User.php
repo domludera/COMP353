@@ -20,14 +20,14 @@ class User extends Model
         if(!$id){
             return $id;
         };
-        $sql = "SELECT * FROM users WHERE id=?;";
+        $sql = "SELECT id, name, dob, email, region, profession FROM users WHERE id=?;";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
         
         $stmt->bind_param(
             "i", // tells you what type the vars will be (check php docs for more info)
-            $id
+         	$id			
         );
         $stmt->execute();
         return $stmt->get_result();
@@ -36,21 +36,22 @@ class User extends Model
     /**
      * Create new user TODO:: Check if email already in use
      */
-    public function create($email, $password, $dob, $region, $profession)
+    public function create($email, $password, $name, $dob, $region, $profession)
     {
         $now = date('Y-m-d H:i:s');
 
         $sql = "INSERT INTO users 
-                (email, password, dob, region, profession, created_at, updated_at) 
-                VALUES (?, ?, ?, ?, ?, ?, ?);";
+                (email, password, name, dob, region, profession, created_at, updated_at) 
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?);";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
         
         $stmt->bind_param(
-            "sssssss", // tells you what type the vars will be (check php docs for more info)
+            "ssssssss", // tells you what type the vars will be (check php docs for more info)
             $email,
             $password,
+			$name,
             $dob,
             $region,
             $profession,
