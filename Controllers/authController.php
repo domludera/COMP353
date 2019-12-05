@@ -6,7 +6,7 @@ class authController extends Controller
     {
         // METHOD: POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            require(ROOT . 'Models/User.php');
+            require_once(ROOT . 'Models/User.php');
             $user = new User();
             $parameters = $_POST;
             $results = $user->create(
@@ -38,7 +38,7 @@ class authController extends Controller
         session_start(); // needed to access $session array
         // METHOD: POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            require(ROOT . 'Models/User.php');
+            require_once(ROOT . 'Models/User.php');
             $user = new User();
             $parameters = $_POST;
             $rawResults = $user->validate(
@@ -51,10 +51,9 @@ class authController extends Controller
             if(isset($result[0])){
                 // Store user id (log them in)
                 $_SESSION['user'] = $result[0]['id'];
-                // echo json_encode($result[0]);
                 $this->redirect("/home/home");
             } else{
-                echo json_encode(null);
+                $this->redirect("/");
             }
         }
         

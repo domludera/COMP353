@@ -6,7 +6,7 @@ class eventsController extends Controller
     function index()
     {
         $this->authed();
-        require(ROOT . 'Models/Event.php');
+        require_once(ROOT . 'Models/Event.php');
         $event = new Event();
         $results["events"] = Event::resultToArray($event->all());
         $this->set($results);
@@ -16,10 +16,20 @@ class eventsController extends Controller
     function create()
     {
         $this->authed();
+
+        require_once(ROOT . 'Models/User.php');
+        
+        // Get current user
+        $user = new User();
+        // var_dump($user->isAdmin($_SESSION["user"]));
+        if(!$user->isAdmin($_SESSION["user"])){
+            $this->redirect("/events");
+        }
+
         // METHOD: POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
-            require(ROOT . 'Models/Event.php');
-            require(ROOT . 'Models/Group.php');
+            require_once(ROOT . 'Models/Event.php');
+            require_once(ROOT . 'Models/Group.php');
             
             $event = new Event();
             $eventResult = Event::resultToArray(
@@ -61,8 +71,8 @@ class eventsController extends Controller
         // METHOD: GET
         if ($_SERVER['REQUEST_METHOD'] == "GET") {
                 
-            require(ROOT . 'Models/EventType.php');
-            require(ROOT . 'Models/User.php');
+            require_once(ROOT . 'Models/EventType.php');
+            require_once(ROOT . 'Models/User.php');
             $eventType = new EventType();
             $results["EventTypes"] = EventType::resultToArray($eventType->all());
             
@@ -77,8 +87,8 @@ class eventsController extends Controller
     function show($id)
     {
         $this->authed();
-        require(ROOT . 'Models/Event.php');
-        require(ROOT . 'Models/Group.php');
+        require_once(ROOT . 'Models/Event.php');
+        require_once(ROOT . 'Models/Group.php');
         $event = new Event();
         $group = new Group();
         $results["event"] = Event::resultToArray($event->find($id))[0];
@@ -94,13 +104,14 @@ class eventsController extends Controller
     function managing()
     {
         $this->authed();
-        require(ROOT . 'Models/Event.php');
-        require(ROOT . 'Models/User.php');
+        require_once(ROOT . 'Models/Event.php');
+        require_once(ROOT . 'Models/User.php');
 
         // Get current user
         $user = new User();
+        $privilege = new Privilege();
         $authed =  User::resultToArray($user->find($_SESSION["user"]))[0];
-
+        
         $event = new Event();
         $results["events"] = Event::resultToArray($event->managed($authed["id"]));
 
@@ -111,8 +122,8 @@ class eventsController extends Controller
     function attending()
     {
         $this->authed();
-        require(ROOT . 'Models/Event.php');
-        require(ROOT . 'Models/User.php');
+        require_once(ROOT . 'Models/Event.php');
+        require_once(ROOT . 'Models/User.php');
 
         // Get current user
         $user = new User();
