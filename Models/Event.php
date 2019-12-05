@@ -122,6 +122,24 @@ class Event extends Model
         return $this->find($insertedId);
     }
 
+    public function isAttending($eventId, $userId){
+        $sql = "SELECT * FROM user_attending 
+            WHERE event_id = ? AND user_id =?;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "ii", // tells you what type the vars will be (check php docs for more info)
+            $eventId,
+            $userId
+        );
+        $stmt->execute();
+        $found = Event::resultToArray($stmt->get_result());
+
+        return count($found) > 0;
+    }
+
     // List attendees
     public function attendees($eventId){
         $sql = "SELECT user_attending.* , users.email FROM user_attending 

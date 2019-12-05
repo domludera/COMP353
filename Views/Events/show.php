@@ -1,3 +1,9 @@
+<?php
+require_once(ROOT . 'Models/Event.php');
+$eventManager = new Event();
+$id = $_SESSION['user'];
+?>
+
 <h1>Event</h1>
 <div class="form-group">
   <label for="name">name</label> <input type="text" class="form-control" id="name" name="name" placeholder="<?= $event["name"]?>" disabled/>
@@ -27,7 +33,10 @@
 <hr>
 
 <h2>Event Groups</h2>
-<a class="btn btn-primary col-12" href="/groups/create/<?= $event["id"]?>" role="button">New</a>
+
+<?php if($eventManager->isAttending($event["id"],$id)) : ?>
+  <a class="btn btn-primary col-12" href="/groups/create/<?= $event["id"]?>" role="button">New</a>
+<?php endif; ?>
 <ul class="list-group">
   <?php foreach($groups as $key => $group): ?>
     <a href="/groups/show/<?= $group["id"]?>"><li class="list-group-item"><?= $group["name"]?></li></a>
