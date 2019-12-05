@@ -109,7 +109,6 @@ class eventsController extends Controller
 
         // Get current user
         $user = new User();
-        $privilege = new Privilege();
         $authed =  User::resultToArray($user->find($_SESSION["user"]))[0];
         
         $event = new Event();
