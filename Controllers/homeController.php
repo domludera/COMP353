@@ -9,6 +9,14 @@ class homeController extends Controller
 
     function home()
     {
+
+        require(ROOT . 'Models/Event.php');
+        $event = new Event();
+        $results["currentEvents"] = Event::resultToArray($event->attendingSoon($_SESSION["user"], 5));
+
+		
+        $this->set($results);
+
         //session_start();
         //if($_SESSION["user"]){
             $this->render("home");
