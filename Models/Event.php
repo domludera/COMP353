@@ -86,7 +86,7 @@ class Event extends Model
      */
     public function groups($eventId){
         $sql = "SELECT * FROM event_group
-            join groups on event_group.group_id=groups.id
+            join app_groups on event_group.group_id=app_groups.id
             WHERE event_id=?;";
 
         $stmt = $this->connectDB($sql);

@@ -1,7 +1,11 @@
 <?php
 
 // Define the start of the project directory
-define('ROOT', getcwd() . "\\..\\");
+if(strpos(php_uname(), 'Linux') !== false){
+	define('ROOT', getcwd() . "/../");
+}else{
+	define('ROOT', getcwd() . "\\..\\");
+}
 
 // include configuration file ( Includes all base classes for the MVC)
 require(ROOT . 'Config/core.php');
@@ -15,8 +19,7 @@ $command = 'mysql'
         . ' --host=' . $dbConfigs['servername']
         . ' --user=' . $dbConfigs['username']
         . ' --password=' . $dbConfigs['password']
-        . ' --execute="SOURCE ' . $script_path
-;
+        . ' --execute="SOURCE ' . $script_path . '"';
 
 shell_exec($command);
 
@@ -24,3 +27,4 @@ shell_exec($command);
 include 'EventTypesSeed.php';
 include 'UserSeed.php';
 include 'InterestsSeed.php';
+
