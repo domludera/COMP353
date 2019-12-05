@@ -6,6 +6,9 @@
     <label for="pwd" required="">Password:</label> <input type="password" class="form-control" id="password" name="password" />
   </div>
   <div class="form-group">
+    <label for="pwd" required="">Name:</label> <input type="text" class="form-control" id="name" name="name" />
+  </div>
+  <div class="form-group">
     <label for="pwd" required="">Date of Birth:</label> <input type="date" class="form-control" id="dob" name="dob" />
   </div>
   <div class="form-group">
