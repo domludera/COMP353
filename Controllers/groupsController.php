@@ -27,6 +27,7 @@ class groupsController extends Controller
             $event = $event[0];
         }
         $results["event"] = $event;
+        $results["requests"] = Group::resultToArray($group->requests($results["group"]["id"]));
         $this->set($results);
         $this->render("show");
         // var_dump($results);
@@ -73,24 +74,93 @@ class groupsController extends Controller
         }
     }
 
-    function join(){
+    // function join(){
+    //     $this->authed();
+    //     if($_SERVER['REQUEST_METHOD'] == 'POST'){
+    //         require_once(ROOT . 'Models/Group.php');
+    //         $group = new Group();
+
+    //         $group->join(
+    //             $_SESSION["user"],
+    //             $_POST["group_id"]
+    //         );
+
+    //         $this->redirect("/groups");
+    //     }
+
+    //     if ($_SERVER['REQUEST_METHOD'] == "GET"){
+    //         $this->render("join");
+    //     }
+
+    // }
+
+    function request($id)
+    {
         $this->authed();
-        if($_SERVER['REQUEST_METHOD'] == 'POST'){
-            require_once(ROOT . 'Models/Group.php');
-            $group = new Group();
+        require(ROOT . 'Models/User.php');
+        require(ROOT . 'Models/Group.php');
 
-            $group->join(
-                $_SESSION["user"],
-                $_POST["group_id"]
-            );
+        // Get current user
+        $userManager = new User();
+        $authed =  User::resultToArray($userManager->find($_SESSION["user"]))[0];
 
-            $this->redirect("/groups");
-        }
+        $groupManager = new Group();
+        $attendance = Group::resultToArray($groupManager->request($id, $authed["id"]));
 
-        if ($_SERVER['REQUEST_METHOD'] == "GET"){
-            $this->render("join");
-        }
-
+        // var_dump($attendance);
+        $this->redirect('/groups/show/' . $id);
     }
+
+    function cancel($id)
+    {
+        $this->authed();
+        require(ROOT . 'Models/User.php');
+        require(ROOT . 'Models/Group.php');
+
+        // Get current user
+        $userManager = new User();
+        $authed =  User::resultToArray($userManager->find($_SESSION["user"]))[0];
+
+        $groupManager = new Group();
+        $groupManager->deleteRequest($id, $authed["id"]);
+
+        // var_dump($attendance);
+        $this->redirect('/groups/show/' . $id);
+    }
+
+    function approve($groupId,$userId)
+    {
+        $this->authed();
+        require(ROOT . 'Models/User.php');
+        require(ROOT . 'Models/Group.php');
+
+        // Get current user
+        $userManager = new User();
+        $authed =  User::resultToArray($userManager->find($_SESSION["user"]))[0];
+
+        $groupManager = new Group();
+        $groupManager->approve($groupId, $userId);
+
+        // var_dump($attendance);
+        $this->redirect('/groups/show/' . $groupId);
+    }
+
+    function deny($groupId,$userId)
+    {
+        $this->authed();
+        require(ROOT . 'Models/User.php');
+        require(ROOT . 'Models/Group.php');
+
+        // Get current user
+        $userManager = new User();
+        $authed =  User::resultToArray($userManager->find($_SESSION["user"]))[0];
+
+        $groupManager = new Group();
+        $groupManager->deleteRequest($groupId, $userId);
+
+        // var_dump($attendance);
+        $this->redirect('/groups/show/' . $groupId);
+    }
+
 
 }

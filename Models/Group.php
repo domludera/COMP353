@@ -118,6 +118,42 @@ class Group extends Model
         return $stmt->get_result();
     }
 
+    public function isMembers($groupId, $userId){
+        $sql = "SELECT user_group.* FROM user_group
+            WHERE group_id=? AND user_id=?;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "ii", // tells you what type the vars will be (check php docs for more info)
+            $groupId,
+            $userId
+        );
+        $stmt->execute();
+        return count(Group::resultToArray($stmt->get_result())) > 0;
+    }
+
+    public function isOwner($groupId, $userId){
+        $group = Group::resultToArray($this->find($groupId))[0];
+        return $group["owner_id"] == $userId;
+    }
+
+    public function requests($groupId){
+        $sql = "SELECT group_request.*, users.email FROM group_request 
+            join users on group_request.user_id=users.id
+            WHERE group_id=?;";
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "i", // tells you what type the vars will be (check php docs for more info)
+            $groupId
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
     public function request($groupId, $userId){
         $sql = "INSERT INTO group_request (group_id, user_id) VALUES (?, ?);";
         $conn = Database::getBdd();
@@ -129,10 +165,9 @@ class Group extends Model
             $userId
         );
         $stmt->execute();
-        $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
         $stmt->close();
 
-        return $this->find($insertedId);
+        return $this->findRequest($groupId, $userId);
     }
 
     public function findRequest($groupId, $userId){
