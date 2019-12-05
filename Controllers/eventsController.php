@@ -19,6 +19,7 @@ class eventsController extends Controller
         // METHOD: POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             require(ROOT . 'Models/Event.php');
+            require(ROOT . 'Models/Group.php');
             
             $event = new Event();
             $eventResult = Event::resultToArray(
@@ -31,10 +32,25 @@ class eventsController extends Controller
                     $_POST["manager_id"]
                 )
             )[0];
+			
+			//Create event group
+			$group = new Group();
+			$groupName = $_POST["name"] . " group";
+			$groupResult = Group::resultToArray(
+				$group->create(
+					$groupName,
+					$_POST["manager_id"])
+				)[0];
+			
+			$group->addToEvent(
+				$eventResult["id"],
+				$groupResult["id"]);
+				
             
             if(isset($_POST["attending_ids"])){
                 foreach ($_POST["attending_ids"] as $key => $attenderId) {
                     $event->attend($eventResult["id"],$attenderId);
+					$group->join($groupResult["id"],$attenderId);
                 }
             }
 
