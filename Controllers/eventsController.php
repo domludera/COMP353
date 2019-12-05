@@ -125,5 +125,23 @@ class eventsController extends Controller
         $this->render("attending");
     }
 
+    function request($id)
+    {
+        $this->authed();
+        require(ROOT . 'Models/Event.php');
+        require(ROOT . 'Models/User.php');
+
+        // Get current user
+        $userManager = new User();
+        $authed =  User::resultToArray($userManager->find($_SESSION["user"]))[0];
+
+        $eventManager = new Event();
+        $attendance = Event::resultToArray($event->request($id, $authed["id"]));
+
+        var_dump($attendance);
+        // $this->set($results);
+        // $this->render("attending");
+    }
+
 }
 ?>

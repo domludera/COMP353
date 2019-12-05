@@ -118,4 +118,82 @@ class Group extends Model
         return $stmt->get_result();
     }
 
+    public function request($groupId, $userId){
+        $sql = "INSERT INTO group_request (group_id, user_id) VALUES (?, ?);";
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "ii", // tells you what type the vars will be (check php docs for more info)
+            $groupId,
+            $userId
+        );
+        $stmt->execute();
+        $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
+        $stmt->close();
+
+        return $this->find($insertedId);
+    }
+
+    public function findRequest($groupId, $userId){
+        
+        $sql = "SELECT * FROM group_request 
+            WHERE group_id = ? AND user_id =?;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "ii", // tells you what type the vars will be (check php docs for more info)
+            $groupId,
+            $userId
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    public function hasPendingRequest($groupId, $userId){
+        $request = Group::resultToArray($this->findRequest($groupId, $userId));
+        return count($request) > 0;
+    }
+
+    public function approve($groupId, $userId){
+        if($this->hasPendingRequest($groupId, $userId)){
+            $this->join($groupId, $userId);
+    
+            $sql = "INSERT INTO group_request (group_id, user_id) VALUES (?, ?);";
+            $conn = Database::getBdd();
+            $stmt = $conn->prepare($sql);
+    
+            $stmt->bind_param(
+                "ii", // tells you what type the vars will be (check php docs for more info)
+                $groupId,
+                $userId
+            );
+            $stmt->execute();
+            $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
+            $stmt->close();
+    
+            $this->deleteRequest($groupId, $userId);
+            return $this->find($insertedId);
+        }
+        
+        return null;
+    }
+
+    public function deleteRequest($groupId, $userId){
+        $sql = "DELETE FROM group_request where group_id=? AND user_id=?;";
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "ii", // tells you what type the vars will be (check php docs for more info)
+            $groupId,
+            $userId
+        );
+        $stmt->execute();
+        $stmt->close();
+        return true;
+    }
+
 }

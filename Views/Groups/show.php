@@ -1,7 +1,6 @@
 <h1>Group</h1>
 <form action="/groups/create" method="post">
 
-
     <?php if($event) : ?>
         <div class="form-group">
             <label for="text">Parent Event</label>
@@ -22,6 +21,13 @@
 
     <hr>
     
+    
+    <?php foreach($members as $key => $user): ?>
+    <div class="form-group">
+        <label for="text">Group name</label>
+        <input type="text" class="form-control" id="name" name="groupname" placeholder="<?=$group["name"] ?>" required disabled>
+    </div>
+
     <h2>Members</h2>
     <ul class="list-group">
     <?php foreach($members as $key => $user): ?>
