@@ -11,9 +11,9 @@ class Group extends Model
         if(!$id){
             return $id;
         };
-        $sql = "SELECT groups.*, users.email as owner FROM groups 
-            join users on groups.owner_id=users.id
-            where groups.id=?;";
+        $sql = "SELECT app_groups.*, users.email as owner FROM app_groups 
+            join users on app_groups.owner_id=users.id
+            where app_groups.id=?;";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
@@ -29,7 +29,7 @@ class Group extends Model
 
     public function partOf($userId){
         $sql = "SELECT * FROM user_group
-            join groups on user_group.group_id=groups.id
+            join app_groups on user_group.group_id=app_groups.id
             WHERE user_id=?;";
 
         $stmt = $this->connectDB($sql);
@@ -42,7 +42,7 @@ class Group extends Model
     }
 
     public function create($name, $owner){
-        $sql = "INSERT INTO groups (name, owner_id) VALUES (?, ?);";
+        $sql = "INSERT INTO app_groups (name, owner_id) VALUES (?, ?);";
         $stmt = $this->connectDB($sql);
         $stmt->bind_param(
             "si",
@@ -57,7 +57,7 @@ class Group extends Model
     }
 
     // public function getLastGroupId(){
-    //     $sql = "SELECT MAX(id) FROM groups;";
+    //     $sql = "SELECT MAX(id) FROM app_groups;";
     //     $stmt = $this->connectDB($sql);
     //     return $this->execSQL($stmt);
     // }

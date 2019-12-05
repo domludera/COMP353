@@ -85,7 +85,7 @@ CREATE TABLE user_attending
 
 -- Lookups
 -- Models
-CREATE TABLE groups
+CREATE TABLE app_groups
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     name     CHAR(255),
@@ -102,7 +102,7 @@ CREATE TABLE user_group
 
     -- fkeys
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (group_id) REFERENCES groups (id)
+    FOREIGN KEY (group_id) REFERENCES app_groups (id)
 );
 
 CREATE TABLE event_group
@@ -113,7 +113,7 @@ CREATE TABLE event_group
 
     -- fkeys
     FOREIGN KEY (event_id) REFERENCES events (id),
-    FOREIGN KEY (group_id) REFERENCES groups (id)
+    FOREIGN KEY (group_id) REFERENCES app_groups (id)
 );
 
 CREATE TABLE group_request
@@ -124,7 +124,7 @@ CREATE TABLE group_request
 
     -- fkeys
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (group_id) REFERENCES groups (id)
+    FOREIGN KEY (group_id) REFERENCES app_groups (id)
 );
 
 /*
@@ -139,7 +139,7 @@ CREATE TABLE messages
     group_id int,
     user_id  int,
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (group_id) REFERENCES groups (id)
+    FOREIGN KEY (group_id) REFERENCES app_groups (id)
 );
 -- Many-to-Manys
 
@@ -156,7 +156,7 @@ CREATE TABLE Post
     group_id int,
     user_id  int,
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (group_id) REFERENCES groups (id)
+    FOREIGN KEY (group_id) REFERENCES app_groups (id)
 );
 
 CREATE TABLE Comment
