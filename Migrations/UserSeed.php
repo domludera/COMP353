@@ -1,4 +1,4 @@
-<?php
+\<?php
 echo "Seeding: Users\n";
 
 // Seeded model

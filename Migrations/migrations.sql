@@ -149,7 +149,7 @@ CREATE TABLE messages
 
 -- Lookups
 -- Models
-CREATE TABLE Post
+CREATE TABLE posts
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     content  CHAR(255),
@@ -159,7 +159,7 @@ CREATE TABLE Post
     FOREIGN KEY (group_id) REFERENCES app_groups (id)
 );
 
-CREATE TABLE Comment
+CREATE TABLE comments
 (
     id      int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     content CHAR(255),
