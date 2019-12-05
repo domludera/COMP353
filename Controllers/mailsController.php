@@ -51,4 +51,3 @@ class mailsController extends Controller {
 }
 
 ?>
-

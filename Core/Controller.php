@@ -85,7 +85,7 @@
 
             if(!isset($_SESSION['user']) || !$_SESSION['user']){
                 //$this->redirect('/auth/login');
-				$this->redirect('/');
+		$this->redirect('/');
             }
 
             return true;
