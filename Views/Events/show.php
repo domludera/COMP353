@@ -2,6 +2,11 @@
 <div class="form-group">
   <label for="name">name</label> <input type="text" class="form-control" id="name" name="name" placeholder="<?= $event["name"]?>" disabled/>
 </div>
+
+<div class="form-group">
+  <label for="name">Manager</label> <input type="text" class="form-control" id="manager" name="manager" placeholder="<?= $event["manager_email"]?>" disabled/>
+</div>
+
 <div class="form-group">
   <label for="name">Event Type</label> <input type="text" class="form-control" id="name" name="name" placeholder="<?= $event["type"]?>" disabled/>
 </div>

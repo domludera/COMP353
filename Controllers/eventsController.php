@@ -96,7 +96,7 @@ class eventsController extends Controller
 
         $results["groups"] = Event::resultToArray($event->groups($results["event"]["id"]));
         
-
+        // var_dump($results);
         $this->set($results);
         $this->render("show");
     }

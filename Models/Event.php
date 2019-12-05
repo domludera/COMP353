@@ -20,8 +20,9 @@ class Event extends Model
         if(!$id){
             return $id;
         };
-        $sql = "SELECT events.*, event_types.name as type FROM events 
+        $sql = "SELECT events.*, event_types.name as type, users.email as manager_email FROM events 
             join event_types on events.event_type_id=event_types.id
+            join users on events.manager_id=users.id
             WHERE events.id=?;";
 
         $conn = Database::getBdd();
