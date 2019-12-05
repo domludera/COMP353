@@ -14,7 +14,7 @@
     <?php foreach($events as $key => $value): ?>
     <tr>
       <td>
-        <a href="/event/show/<?=$value['id']?>"><?= $value["id"]?>
+        <a href="/events/show/<?=$value['id']?>"><?= $value["id"]?>
         </a>
       </td>
       <td><?= $value["name"]?>

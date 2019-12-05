@@ -1,12 +1,12 @@
 <h1>Group</h1>
-<form action="/group/create" method="post">
+<form action="/groups/create" method="post">
 
 
     <?php if($event) : ?>
         <div class="form-group">
             <label for="text">Parent Event</label>
             <input type="text" class="form-control" id="name" name="owner" placeholder="<?=$event["name"]?>" required disabled>
-            <a href="/event/show/<?=$event["id"]?>">Link to event</a>
+            <a href="/events/show/<?=$event["id"]?>">Link to event</a>
         </div>
     <?php endif; ?>
 

@@ -3,7 +3,7 @@
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">Inbox</h6>
   </div>
-  <form action="/mail/create/" method="get">
+  <form action="/mails/create/" method="get">
     <button type="submit" style="right-side" class="btn btn-primary">New Mail</button>
   </form>
   <div class="card-body">
@@ -20,7 +20,7 @@
           <?php foreach($mails as $key => $value): ?>
           <tr>
             <td>
-              <a href="/mail/show/<?= $value["id"]?>"><?= $value["id"]?>
+              <a href="/mails/show/<?= $value["id"]?>"><?= $value["id"]?>
               </a>
             </td>
             <td><?= $value["from_user_id"]?>

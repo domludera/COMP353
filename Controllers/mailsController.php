@@ -1,6 +1,6 @@
 <?php
 
-class mailController extends Controller {
+class mailsController extends Controller {
 
     function index() {
         $this->authed();
@@ -27,7 +27,7 @@ class mailController extends Controller {
                     $_SESSION["user"], $_POST["to"], $_POST["subject"], $_POST["content"]
             );
             // echo json_encode(Mail::resultToArray($results)[0]);
-            $this->redirect("/mail");
+            $this->redirect("/mails");
         }
 
         // METHOD: GET

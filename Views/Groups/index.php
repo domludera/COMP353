@@ -1,4 +1,4 @@
-<form action="/group/create/" method="get">
+<form action="/groups/create/" method="get">
     <button type="submit" class="btn btn-primary">Create Group</button>
 </form>
 
@@ -19,7 +19,7 @@
         <tbody>
         <?php foreach($groups as $key => $value): ?>
             <tr>
-                <td><a href="/group/show/<?= $value["group_id"]?>"><?= $value["group_id"]?></a></td>
+                <td><a href="/groups/show/<?= $value["group_id"]?>"><?= $value["group_id"]?></a></td>
                 <td><?= $value["name"]?></td>
             </tr>
         <?php endforeach; ?>
@@ -33,7 +33,7 @@
     You haven't joined any groups yet!
 <?php endif; ?>
 
-<form action="/group/join/" method="get">
+<form action="/groups/join/" method="get">
     <button type="submit" class="btn btn-primary">Join Group</button>
 </form>
 

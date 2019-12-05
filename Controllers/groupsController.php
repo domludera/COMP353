@@ -1,7 +1,7 @@
 <?php
 
 
-class groupController extends Controller
+class groupsController extends Controller
 {
 
     function index(){
@@ -58,7 +58,7 @@ class groupController extends Controller
                 }
             }
             
-            $this->redirect("/group/show/".$groupResult["id"]);
+            $this->redirect("/groups/show/".$groupResult["id"]);
         }
 
         if ($_SERVER['REQUEST_METHOD'] == "GET"){
@@ -84,7 +84,7 @@ class groupController extends Controller
                 $_POST["group_id"]
             );
 
-            $this->redirect("/group");
+            $this->redirect("/groups");
         }
 
         if ($_SERVER['REQUEST_METHOD'] == "GET"){

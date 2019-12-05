@@ -1,6 +1,6 @@
 <?php
 
-class eventController extends Controller
+class eventsController extends Controller
 {
     
     function index()
@@ -38,7 +38,7 @@ class eventController extends Controller
                 }
             }
 
-            $this->redirect("/event");
+            $this->redirect("/events");
 
         }
         

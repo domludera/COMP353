@@ -1,5 +1,5 @@
 <h1>New Mail</h1>
-<form action="/mail/create" method="post">
+<form action="/mails/create" method="post">
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <div class="form-group">

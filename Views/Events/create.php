@@ -1,5 +1,5 @@
 <h1>New Event</h1>
-<form action="/event/create" method="post">
+<form action="/events/create" method="post">
   <div class="card shadow mb-4">
     <div class="card-header py-3">
       <div class="form-group">

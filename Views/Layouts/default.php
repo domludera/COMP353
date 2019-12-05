@@ -74,15 +74,15 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">My Events:</h6>
-            <a class="collapse-item" href="/event">Active</a>
-            <a class="collapse-item" href="/event/attending">Attending</a>
-            <a class="collapse-item" href="/event/managing">Managing</a>
+            <a class="collapse-item" href="/events">Active</a>
+            <a class="collapse-item" href="/events/attending">Attending</a>
+            <a class="collapse-item" href="/events/managing">Managing</a>
           </div>
         </div>
       </li>
 	  <!-- Nav Item - Utilities Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link collapsed" href="/group"><i class="fas fa-fw fa-users"></i> <span>Groups</span></a>
+        <a class="nav-link collapsed" href="/groups"><i class="fas fa-fw fa-users"></i> <span>Groups</span></a>
       </li>
 	  <!--IF SYSTEM ADMIN-->
       <!-- Divider -->
@@ -93,14 +93,14 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
       </div>
 	  <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
-        <a class="nav-link" href="/event"><i class="fas fa-fw fa-cog"></i> <span>Configuration</span></a>
+        <a class="nav-link" href="/events"><i class="fas fa-fw fa-cog"></i> <span>Configuration</span></a>
       </li>
 	  <!-- Nav Item - Pages Collapse Menu -->
       <li class="nav-item">
         <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTo" aria-expanded="true" aria-controls="collapseTo"><i class="fas fa-fw fa-cog"></i> <span>Events</span></a>
         <div id="collapseTo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
-            <h6 class="collapse-header">Select:</h6><a class="collapse-item" href="/event/create">Create</a> <a class="collapse-item" href="/event/edit">Edit</a>
+            <h6 class="collapse-header">Select:</h6><a class="collapse-item" href="/events/create">Create</a> <a class="collapse-item" href="/events/edit">Edit</a>
           </div>
         </div>
       </li>
@@ -207,7 +207,7 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
               </span></a> 
 			  <!-- Dropdown - Messages -->
               <div class="dropdown-list dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="messagesDropdown">
-                <h6 class="dropdown-header">Mail Center</h6><a class="dropdown-item d-flex align-items-center" href="/mail/show/4">
+                <h6 class="dropdown-header">Mail Center</h6><a class="dropdown-item d-flex align-items-center" href="/mails/show/4">
                 <div class="dropdown-list-image mr-3">
                   <img class="rounded-circle" src="https://source.unsplash.com/fn_BT9fwg_E/60x60" alt="" />
                   <div class="status-indicator bg-success"></div>
@@ -217,7 +217,7 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
                   <div class="small text-gray-500">
                     PersonY · 58m
                   </div>
-                </div></a> <a class="dropdown-item text-center small text-gray-500" href="/mail">Read More Messages</a>
+                </div></a> <a class="dropdown-item text-center small text-gray-500" href="/mails">Read More Messages</a>
               </div>
             </li>
             <div class="topbar-divider d-none d-sm-block"></div>
@@ -225,7 +225,7 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="mr-2 d-none d-lg-inline text-gray-600 small">Priscilla</span> <img class="img-profile rounded-circle" src="/Bootstrap/img/Portrait_Placeholder.png" /></a> <!-- Dropdown - User Information -->
               <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="/user/self"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile</a> <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings</a> <a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log</a>
+                <a class="dropdown-item" href="/users/self"><i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i> Profile</a> <a class="dropdown-item" href="#"><i class="fas fa-cogs fa-sm fa-fw mr-2 text-gray-400"></i> Settings</a> <a class="dropdown-item" href="#"><i class="fas fa-list fa-sm fa-fw mr-2 text-gray-400"></i> Activity Log</a>
                 <div class="dropdown-divider"></div><a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal"><i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-gray-400"></i> Logout</a>
               </div>
             </li>

@@ -1,5 +1,5 @@
 <h1>New Group</h1>
-<form action="/group/create" method="post">
+<form action="/groups/create" method="post">
 
     <input type="hidden" class="form-control" id="name" name="event_id" value="<?=$eventId?>" required>
 
