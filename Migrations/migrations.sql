@@ -1,7 +1,7 @@
 /*
  Create the database & use it
 */
-DROP SCHEMA trc353_2;
+DROP SCHEMA IF EXISTS trc353_2;
 CREATE SCHEMA trc353_2;
 USE trc353_2;
 
