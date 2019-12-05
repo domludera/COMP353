@@ -37,7 +37,7 @@ class Event extends Model
     }
 
     /**
-     * Creates an event, and a group for it.
+     * Creates an event
      */
     public function create($name,$type,$start,$end,$reoccuring, $managerId)
     {
