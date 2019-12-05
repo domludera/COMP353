@@ -27,3 +27,4 @@ shell_exec($command);
 include 'EventTypesSeed.php';
 include 'UserSeed.php';
 include 'InterestsSeed.php';
+include 'EventSeed.php';
