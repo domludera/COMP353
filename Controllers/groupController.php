@@ -66,7 +66,7 @@ class groupController extends Controller
             $results = ['eventId' => $eventId];
 
             $users = new User();
-            $results["users"] = User::resultToArray($users->list());
+            $results["users"] = User::resultToArray($users->listing());
 
             $this->set($results);
             $this->render("create");

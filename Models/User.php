@@ -1,7 +1,7 @@
 <?php
 class User extends Model
 {
-    public function list()
+    public function listing()
     {
         $sql = "SELECT id, email FROM users;";
 
