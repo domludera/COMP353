@@ -37,7 +37,7 @@ class Event extends Model
     }
 
     /**
-     * Create new user TODO:: Check if email already in use
+     * Creates an event
      */
     public function create($name,$type,$start,$end,$reoccuring, $managerId)
     {
