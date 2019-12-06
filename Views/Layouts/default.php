@@ -74,8 +74,7 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">My Events:</h6>
-            <a class="collapse-item" href="/events">Active</a>
-            <a class="collapse-item" href="/events/attending">Attending</a>
+            <a class="collapse-item" href="/events">Attending</a>
             <a class="collapse-item" href="/events/managing">Managing</a>
           </div>
         </div>
