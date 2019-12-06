@@ -1,8 +1,20 @@
+<?php
+require_once(ROOT . 'Models/User.php');
+$user = new User();
+$id = $_SESSION['user'];
+?>
+<?php if($user->isAdmin($id)) : ?>
+<form action="/events/create/" method="get">
+  <button type="submit" class="btn btn-primary">New Event</button>
+</form>
+<?php endif; ?>
 <hr />
-<h1>Attending event</h1><!-- Have Mail Pending -->
+<h1>Attending Events</h1><!-- Active Events -->
 <?php if($events && count($events) > 0) : ?>
-<table class="table table-dark">
-  <thead>
+<div class="card-body">
+    <div class="table-responsive">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+        <thead>
     <tr>
       <th>Id</th>
       <th>Name</th>
@@ -25,5 +37,17 @@
       </td>
     </tr><?php endforeach; ?>
   </tbody>
-</table><?php endif; ?><!-- No Mail Pending -->
+  <tfoot>
+          <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Start</th>
+      <th>End</th>
+    </tr>
+        </tfoot>
+</table><?php endif; ?>
+  <!-- No Mail Pending -->
 <?php if(!$events || count($events) == 0) : ?>No events! <?php endif; ?>
+</div>
+  </div>
+</div>
