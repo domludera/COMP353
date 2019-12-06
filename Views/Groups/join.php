@@ -1,4 +1,3 @@
-
 <h1>Join Group</h1>
 <p>//TO DO show list of available groups for join request</p>
 <form action="/groups/join" method="post">
