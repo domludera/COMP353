@@ -1,12 +1,15 @@
 <h1 class="h3 mb-2 text-gray-800">Edit My Profile</h1>
 <hr>
-<form action="/users/update" method="post"  enctype="multipart/form-data">
+<form action="/users/edit" method="post"  enctype="multipart/form-data">
+    <div id="Photo">Current User Photo
+        <hr>
+        <div class="card" style="width: 18rem;">
+            <img class="card-img-top" src="<?= "/uploads/" . $user['image'] ?>" alt="<?= $user['name'] ?>">            
+        </div>
+    </div>
     <div class="form-group">
         <label for="email" required="">Email address:</label> <input type="email" class="form-control" id="email" name="email" value="<?= $user['email'] ?>"/>
-    </div>
-    <div class="form-group">
-        <label for="pwd" required="">Password:</label> <input type="password" class="form-control" id="password" name="password" value="<?= $user['password'] ?>" />
-    </div>
+    </div>    
     <div class="form-group">
         <label for="name" required="">Name:</label> <input type="text" class="form-control" id="name" name="name" value="<?= $user['name'] ?>"/>
     </div>
