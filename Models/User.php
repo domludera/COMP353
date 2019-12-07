@@ -19,7 +19,7 @@ class User extends Model {
         if (!$id) {
             return $id;
         };
-        $sql = "SELECT id, name, dob, email, password, region, profession, image, updated_at FROM users WHERE id=?;";
+        $sql = "SELECT id, name, dob, email,  region, profession, image, updated_at FROM users WHERE id=?;";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
@@ -40,9 +40,9 @@ class User extends Model {
      * @param type $description
      * @return type
      */
-    public function edit($id, $email, $profession, $dob, $password, $name, $region, $file) {
+    public function edit($id, $email, $profession, $dob,  $name, $region, $file) {
         $target_path = "";
-        $sql = "UPDATE users SET email = ?, profession = ? , dob = ?,password = ?, name = ?, region=?, updated_at = ?  WHERE id = " . $id;
+        $sql = "UPDATE users SET email = ?, profession = ? , dob = ?,name = ?, region=?, updated_at = ?  WHERE id = " . $id;
         if (isset($file) && !empty($file["fileToUpload"])) {
             $theFile = $_FILES["fileToUpload"];
             $target_path = self::uploadNewPicture($theFile);
@@ -52,8 +52,8 @@ class User extends Model {
         $now = date('Y-m-d H:i:s');
 
         $res = $stmt->bind_param(
-                "sssssss", // tells you what type the vars will be (check php docs for more info)
-                $email, $profession, $dob, $password, $name, $region, $now
+                "ssssss", // tells you what type the vars will be (check php docs for more info)
+                $email, $profession, $dob,  $name, $region, $now
         );
         $res = $stmt->execute();
         if (!$res) {
@@ -61,7 +61,7 @@ class User extends Model {
             exit;
         }
         // Update the profile image        
-        if (!empty($_FILES["fileToUpload"])) {
+        if (!empty($_FILES["fileToUpload"]) && $_FILES["fileToUpload"]["size"] > 55) {
             $sql = "UPDATE users SET image = ? WHERE id = " . $id;
             $theFile = $_FILES["fileToUpload"];
             $target_path = self::uploadNewPicture($theFile);
@@ -166,7 +166,7 @@ class User extends Model {
 
     private static function uploadNewPicture($theFile) {
         //The controller code...
-        $target_dir = ROOT."uploads/"; //the folder where files will be saved
+        $target_dir = ROOT . "uploads/"; //the folder where files will be saved
         $allowedTypes = array("jpg", "png", "jpeg", "gif", "bmp"); // Allow certain file formats
         $max_upload_bytes = 5000000;
         $error = '';
@@ -174,7 +174,7 @@ class User extends Model {
         $newRealtivePath = '';
         $uploadOk = 1;
         $target_file_name = "";
-        if (isset($theFile)) {
+        if (isset($theFile) &&  $theFile['size'] > 2) {
             //Check if image file is a actual image or fake image
             //this is not a guarantee that malicious code may be passed in disguise
 
