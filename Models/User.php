@@ -38,6 +38,7 @@ class User extends Model
      */
     public function create($email, $password, $name, $dob, $region, $profession)
     {
+        $hash_password = password_hash($password, 1);
         $now = date('Y-m-d H:i:s');
 
         $sql = "INSERT INTO users 
@@ -50,7 +51,7 @@ class User extends Model
         $stmt->bind_param(
             "ssssssss", // tells you what type the vars will be (check php docs for more info)
             $email,
-            $password,
+            $hash_password,
 			$name,
             $dob,
             $region,
@@ -89,15 +90,14 @@ class User extends Model
      */
     public function validate($email, $password)
     {
-        $sql = "SELECT * FROM users WHERE email=? AND password = ?;";
+        $sql = "SELECT * FROM users WHERE email=?;";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
         
         $stmt->bind_param(
-            "ss", // tells you what type the vars will be (check php docs for more info)
-            $email,
-            $password
+            "s", // tells you what type the vars will be (check php docs for more info)
+            $email
         );
         $stmt->execute();
         return $stmt->get_result();

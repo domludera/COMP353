@@ -49,9 +49,12 @@ class authController extends Controller
             // Parse results
             $result = User::resultToArray($rawResults);
             if(isset($result[0])){
-                // Store user id (log them in)
-                $_SESSION['user'] = $result[0]['id'];
-                $this->redirect("/home/home");
+                $my_pass = $result[0]['password'];
+                if(password_verify($parameters["password"],$result[0]["password"])){
+                    // Store user id (log them in)
+                    $_SESSION['user'] = $result[0]['id'];
+                    $this->redirect("/home/home");
+                }
             } else{
                 $this->redirect("/");
             }
