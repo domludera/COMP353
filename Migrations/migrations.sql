@@ -28,7 +28,9 @@ CREATE TABLE users
     profession CHAR(255),
 	image	   VARCHAR(255) DEFAULT NULL,
     created_at Date,
-    updated_at Date
+    updated_at Date,
+	
+	CHECK (dob <= CURDATE())
 );
 CREATE TABLE privileges
 (
@@ -82,7 +84,11 @@ CREATE TABLE events
     manager_id    int,
 
     FOREIGN KEY (event_type_id) REFERENCES event_types (id),
-    FOREIGN KEY (manager_id) REFERENCES users (id)
+    FOREIGN KEY (manager_id) REFERENCES users (id),
+	
+	CHECK (start_at <= end_at),
+	CHECK (start_at >= CURDATE())
+
 );
 
 -- Many-to-Manys
