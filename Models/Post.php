@@ -12,16 +12,18 @@ class Post extends Model
         return $stmt->get_result();
     }
 
-    public function byGroup($groupId)
+    public function byEvent($eventId)
     {
-        $sql = "SELECT * FROM posts where group_id = ?;";
+        $sql = "SELECT * FROM posts 
+            join users on user_attending.user_id=users.id
+            where event_id = ?;";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
         
         $stmt->bind_param(
             "i", // tells you what type the vars will be (check php docs for more info)
-            $groupId
+            $eventId
         );
 
         $stmt->execute();
@@ -50,10 +52,10 @@ class Post extends Model
         return $stmt->get_result();
     }
 
-    public function create($groupId,$userId,$content)
+    public function create($eventId,$userId,$content)
     {
         $sql = "INSERT INTO posts 
-                (group_id, user_id, content) 
+                (event_id, user_id, content) 
                 VALUES (?, ?, ?);";
 
         $conn = Database::getBdd();
@@ -63,7 +65,7 @@ class Post extends Model
 
         $stmt->bind_param(
             "iis", // tells you what type the vars will be (check php docs for more info)
-            $groupId,
+            $eventId,
             $userId,
             $content
         );

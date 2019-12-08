@@ -171,10 +171,10 @@ CREATE TABLE posts
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
     content  CHAR(255),
-    group_id int,
+    event_id int,
     user_id  int,
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (group_id) REFERENCES app_groups (id)
+    FOREIGN KEY (event_id) REFERENCES events (id)
 );
 
 CREATE TABLE comments
