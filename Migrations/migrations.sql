@@ -26,6 +26,7 @@ CREATE TABLE users
     dob        DATE,
     region     CHAR(255),
     profession CHAR(255),
+	image	   VARCHAR(255) DEFAULT NULL,
     created_at Date,
     updated_at Date
 );
