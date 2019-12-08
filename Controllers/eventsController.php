@@ -132,7 +132,8 @@ class eventsController extends Controller
         $results["events"] = Event::resultToArray($event->attending($authed["id"]));
 
         $this->set($results);
-        $this->render("attending");
+		$this->render("events");
+        //$this->render("attending");
     }
 
 }
