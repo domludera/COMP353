@@ -170,19 +170,24 @@ CREATE TABLE messages
 CREATE TABLE posts
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    content  CHAR(255),
-    group_id int,
+    content  LONGTEXT,
+    event_id int,
     user_id  int,
+    created_at DATETIME,
+    updated_at DATETIME,
+
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (group_id) REFERENCES app_groups (id)
+    FOREIGN KEY (event_id) REFERENCES events (id)
 );
 
 CREATE TABLE comments
 (
     id      int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    content CHAR(255),
+    content LONGTEXT,
     post_id int,
     user_id int,
+    created_at DATETIME,
+    updated_at DATETIME,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (post_id) REFERENCES posts (id)
 );
