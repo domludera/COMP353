@@ -72,17 +72,20 @@ $id = $_SESSION['user'];
 
   <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
 
+
     <!-- Post something -->
-    <form action='/posts/create/<?=$event["reoccuring"]?>' method="POST">
+    <?php if($eventManager->isAttending($event["id"],$id)) : ?>
+    <form action='/posts/create/<?=$event["id"]?>' method="POST">
       <div class="form-check">
         <label for="exampleInputEmail1">Post Something</label>
         <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="content" placeholder="What is on your mind" required>
         <button type="submit" class="btn btn-primary">Submit</button>
       </div>
     </form>
-    
-    <!-- Posts -->
     <hr>
+    <?php endif; ?>
+
+    <!-- Posts -->
 
     <div class="row">
       <div class="col-12">
@@ -91,14 +94,38 @@ $id = $_SESSION['user'];
 
         <!-- Post lists -->
         
+        <!-- Contains posts -->
+        
         <?php foreach($posts as $key => $post): ?>
+
           <div class="post">
             <img src="https://via.placeholder.com/50" alt="Avatar">
             <p><?= $post["content"]?></p>
-            <span class="time-right">11:00</span>
+            <span class="time-left"><?= $post["email"]?></span>  
+            <span class="time-right"><?= $post["created_at"]?></span>  
           </div>
+          <!-- comment something -->
+          <?php if($eventManager->isAttending($event["id"],$id)) : ?>
+          <form action='/comments/create/<?=$post["id"]?>' method="POST">
+            <div class="form-check">
+              <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="content" placeholder="Comment" required>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </form>
+          <?php endif; ?>
+
+          <?php foreach($post["comments"] as $key => $comment): ?>
+            <div class="comment">
+              <p><?= $comment["content"]?></p>
+              <span class="time-left"><?= $comment["email"]?></span>  
+              <span class="time-right"><?= $comment["created_at"]?></span>  
+            </div>
+            <br>
+          <?php endforeach; ?>
+
         <?php endforeach; ?>
 
+        <!-- No posts -->
         <?php if(count($posts) == 0) : ?>
           <h4 class="text-center"> There doesn't seem to be any posts yet!</h4>
         <?php endif; ?>
@@ -111,5 +138,73 @@ $id = $_SESSION['user'];
 
   </div>
   <!-- Posts End-->
-
 </div>
+
+<style>
+
+/* .post{
+  background-color: grey;
+  color: white;
+  margin: 10px;
+} */
+
+.comment{
+  margin:20px;
+  word-wrap: break-word;
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+}
+
+/* Chat containers */
+.post {
+  word-wrap: break-word;
+  border: 2px solid #dedede;
+  background-color: #f1f1f1;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px 0;
+}
+
+/* Darker chat container */
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+}
+
+/* Clear floats */
+.post::after{
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* Style images */
+.post img{
+  float: left;
+  max-width: 60px;
+  width: 100%;
+  margin-right: 20px;
+  border-radius: 50%;
+}
+
+/* Style the right image */
+.post img.right {
+  float: right;
+  margin-left: 20px;
+  margin-right:0;
+}
+
+/* Style time text */
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+  float: left;
+  color: #999;
+}
+
+</style>

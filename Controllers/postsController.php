@@ -15,8 +15,8 @@ class postsController extends Controller
                 $_SESSION["user"],
                 $_POST["content"]
             );
-            var_dump(Post::resultToArray($results));
-            // $this->redirect("/posts");
+            // var_dump(Post::resultToArray($results));
+            $this->redirect("/events/show/$eventId");
         }
     }
 

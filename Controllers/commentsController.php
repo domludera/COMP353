@@ -3,20 +3,23 @@
 // TODO: Can't test without having groups done first
 class commentsController  extends Controller
 {
-    function create()
+    function create($postId)
     {
         $this->authed();
         // METHOD: POST
         if ($_SERVER['REQUEST_METHOD'] == 'POST'){
             require_once(ROOT . 'Models/Comment.php');
+            require_once(ROOT . 'Models/Post.php');
+            $post = new Post();
             $comment = new Comment();
             $results = $comment->create(
-                $_POST["post_id"],
-                $_POST["user_id"],
+                $postId,
+                $_SESSION["user"],
                 $_POST["content"]
             );
-            // echo json_encode(Mail::resultToArray($results)[0]);
-            // $this->redirect("home");
+
+            $eventId = Post::resultToArray($post->find($postId))[0]["event_id"];
+            $this->redirect("/events/show/$eventId");
         }
     }
 
