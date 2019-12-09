@@ -20,7 +20,7 @@ CREATE TABLE interests
 CREATE TABLE users
 (
     id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    email      CHAR(255),
+    email      CHAR(255) NOT NULL,
     password   CHAR(255),
     name       CHAR(255),
     dob        DATE,
@@ -95,8 +95,8 @@ CREATE TABLE events
 CREATE TABLE user_attending
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id  int,
-    event_id int,
+    user_id  int NOT NULL,
+    event_id int NOT NULL,
 
     -- fkeys
     FOREIGN KEY (user_id) REFERENCES users (id),
@@ -225,3 +225,36 @@ CREATE TABLE mails
 -- Lookups
 -- Models
 -- Many-to-Manys
+
+
+delimiter //
+CREATE TRIGGER attending_archived
+	BEFORE INSERT
+	ON user_attending
+	FOR EACH ROW
+BEGIN
+DECLARE event_end_date DATE;
+
+SELECT end_at
+	INTO event_end_date
+	FROM events
+	WHERE events.id = NEW.event_id;
+	
+	IF CURDATE() > event_end_date
+	THEN
+		SET NEW.event_id = NULL;
+	END IF;
+END//
+
+CREATE TRIGGER emails_unique
+	BEFORE INSERT
+	ON users
+	FOR EACH ROW
+BEGIN
+	IF EXISTS(SELECT * FROM users WHERE users.email = NEW.email)
+	THEN
+		SET NEW.email = NULL;
+	END IF;
+END//
+
+delimiter ;
