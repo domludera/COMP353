@@ -88,7 +88,7 @@ class User extends Model
     /**
      * Validate credentials
      */
-    public function validate($email, $password)
+    public function validate($email)
     {
         $sql = "SELECT * FROM users WHERE email=?;";
 
