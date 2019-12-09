@@ -20,15 +20,16 @@
                         <thead>
                             <tr>
                                 <th>Resource</th>
-                                <th>Rate</th>
+								<th>Data</th>
+                                <th>Rate (CAN $)</th>
                             </tr>
                         </thead>
                         <?php if ($resources && count($resources) > 0) : ?>
                             <tbody>
                                 <?php foreach ($resources as $key => $value): ?>
                                     <tr>
-                                        <td><?= $value["name"] ?>
-                                        </td>
+                                        <td><?= $value["name"] ?></td>
+										<td><?= $value["data"] ?></td>
                                         <td>         
                                             <!--Hidden field to hold the ids of the rates being edited.-->
                                             <input type="hidden" class="form-control" id="ids<?= $value["id"] ?>" name="resourceIds[]" value="<?= $value["id"]?>"/>                                            
@@ -39,7 +40,8 @@
                         <tfoot>
                             <tr>
                                 <th>Resource</th>
-                                <th>Rate</th>
+								<th>Data</th>
+                                <th>Rate (CAN $)</th>
                             </tr>
                         </tfoot>
                     </table>

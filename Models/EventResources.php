@@ -52,7 +52,7 @@ class EventResources extends Model
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "sissii", // tells you what type the vars will be (check php docs for more info)
+            "iiidd", // tells you what type the vars will be (check php docs for more info)
             $eventId,
             $resourceId,
 			$rate,

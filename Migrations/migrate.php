@@ -29,3 +29,7 @@ include 'EventTypesSeed.php';
 include 'UserSeed.php';
 include 'InterestsSeed.php';
 include 'EventSeed.php';
+include 'ResourcesSeed.php';
+include 'EventResourcesSeed.php';
+include 'BilledEventResourcesSeed.php';
+include 'BillSeed.php';
