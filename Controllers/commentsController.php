@@ -17,7 +17,6 @@ class commentsController  extends Controller
                 $_SESSION["user"],
                 $_POST["content"]
             );
-
             $eventId = Post::resultToArray($post->find($postId))[0]["event_id"];
             $this->redirect("/events/show/$eventId");
         }

@@ -84,8 +84,7 @@ class User extends Model {
     /**
      * Create new user TODO:: Check if email already in use
      */
-
-    public function create($email, $password, $name, $dob, $region, $profession)
+   public function create($email, $password, $name, $dob, $region, $profession)
     {
         $hash_password = password_hash($password, 1);
         $now = date('Y-m-d H:i:s');
@@ -98,7 +97,6 @@ class User extends Model {
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-
             "ssssssss", // tells you what type the vars will be (check php docs for more info)
             $email,
             $hash_password,
@@ -137,8 +135,7 @@ class User extends Model {
     /**
      * Validate credentials
      */
-
-    public function validate($email)
+      public function validate($email)
     {
         $sql = "SELECT * FROM users WHERE email=?;";
 

@@ -1,0 +1,88 @@
+<?php
+
+class Bill extends Model {
+
+    public function all() {
+        $sql = "SELECT * FROM bill;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    /**
+     * Find a given record by its ID
+     */
+    public function find($id) {
+        if (!$id) {
+            return $id;
+        };
+        $sql = "SELECT bill.id, event_resources.start_at, event_resources.end_at, bill.total FROM bill
+				JOIN billed_event_resources ON bill.id = billed_event_resources.id 
+				JOIN event_resources ON bill.resource_id = event_resources.resource_id WHERE bill.id=?;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        echo mysqli_error($conn);
+
+        $stmt->bind_param(
+                "i", // tells you what type the vars will be (check php docs for more info)
+                $id
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+
+    /**
+     * Creates a bill
+     */
+    public function create($id, $start_at, $end_at, $total) {
+        $sql = "INSERT INTO bills 
+                (id , start_at, end_at, total) 
+                VALUES (?, ?);";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+                "iddi", // tells you what type the vars will be (check php docs for more info)
+                $id, 
+				$start_at,
+				$end_at,
+				$total
+        );
+        $stmt->execute();
+        $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
+        $stmt->close();
+
+        return $this->find($insertedId);
+    }
+	
+	/**
+     * Event Resources Section
+     */
+     public function eventResources($id){
+		if(!$id){
+            return $id;
+        };
+		$sql = "SELECT resources.name AS resource_name, resources.rate FROM event_resources 
+				JOIN events ON event_resources.event_id = events.id
+				JOIN resources ON event_resources.resource_id = resources.id
+				WHERE event_resources.event_id=?;";
+				
+		$conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        echo mysqli_error($conn);
+        
+        $stmt->bind_param(
+            "i", // tells you what type the vars will be (check php docs for more info)
+            $id
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+        
+    }
+}
+
+?>

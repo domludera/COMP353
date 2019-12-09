@@ -217,6 +217,52 @@ CREATE TABLE mails
 );
 -- Many-to-Manys
 
+CREATE TABLE event_resources
+(
+    id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    event_id int,
+    resource_id  int,
+    rate float,
+    start_at Date,
+    end_at Date,
+
+    -- fkeys
+    FOREIGN KEY (event_id) REFERENCES events (id),
+    FOREIGN KEY (resource_id) REFERENCES resources (id)
+);
+
+CREATE TABLE billed_event_resources
+(
+    id       			int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    bill_id 			int,
+    event_resources_id  int,
+   
+    -- fkeys
+    FOREIGN KEY (bill_id) REFERENCES bill (id),
+    FOREIGN KEY (event_resources_id) REFERENCES event_resources (id)
+);
+
+/*
+Billing
+*/
+-- Lookups
+CREATE TABLE resources
+(
+    id   int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(255),
+    data CHAR(255),
+    rate float
+);
+
+-- Models
+CREATE TABLE bill
+(
+    id            	int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    event_id 		int,
+    total      		float
+);
+
+
 /*------------------ Sample Section -----------------------*/
 /*
  Section

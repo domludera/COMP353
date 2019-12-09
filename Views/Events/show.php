@@ -2,8 +2,11 @@
 require_once(ROOT . 'Models/Event.php');
 $eventManager = new Event();
 $id = $_SESSION['user'];
-?>
 
+require_once(ROOT . 'Models/User.php');
+$currentUser = new User();
+
+?>
 <ul class="nav nav-tabs" id="myTab" role="tablist">
   <li class="nav-item">
     <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Information</a>
@@ -11,13 +14,11 @@ $id = $_SESSION['user'];
   <li class="nav-item">
     <a class="nav-link" id="posts-tab" data-toggle="tab" href="#posts" role="tab" aria-controls="posts" aria-selected="false">Posts</a>
   </li>
-</ul>
-<hr>
 <!-- General Information -->
 <div class="tab-content" id="myTabContent">
 
   <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
-    <h1>Event</h1>
+    <h1>Event Details</h1>
     <div class="form-group">
       <label for="name">Name</label> <input type="text" class="form-control" id="name" name="name" placeholder="<?= $event["name"]?>" disabled/>
     </div>
@@ -45,7 +46,7 @@ $id = $_SESSION['user'];
     </div>
     <hr>
 
-    <h2>Event Groups</h2>
+   <h2>Event Groups</h2>
 
     <?php if($eventManager->isAttending($event["id"],$id)) : ?>
       <a class="btn btn-primary col-12" href="/groups/create/<?= $event["id"]?>" role="button">New</a>
@@ -64,11 +65,74 @@ $id = $_SESSION['user'];
         <li class="list-group-item"><?= $user["email"]?></li> 
       <?php endforeach; ?>
     </ul>
-    
+ <hr>
+<?php if($currentUser->isController($id) || $currentUser->isAdmin($id)) : ?>
+
+<h2>Event Resources</h2>
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Resource</th>
+						<th>Rate</th>
+					</tr>
+				</thead>
+				<?php if ($eventResources && count($eventResources) > 0) : ?>
+					<tbody>
+						<?php foreach($eventResources as $key => $eventResource): ?>
+							<tr>
+								<td width="25%"><?= $eventResource["resource_name"]?>
+								</td>
+								<td width="5%">
+									<?= $eventResource["rate"]?>                                   
+								</td>
+							</tr><?php endforeach; ?>
+					</tbody>
+				<?php endif; ?>
+			</table>
+		</div>
+	</div>
+</div>
+<hr>
+
+<h2>Billing</h2>
+<div class="card shadow mb-4">
+	<div class="card-header py-3">
+		<div class="table-responsive">
+			<table class="table table-bordered" id="dataTable" width="50%" cellspacing="0">
+				<thead>
+					<tr>
+						<th>Bill Number</th>
+						<th>Starting Period</th>
+						<th>Ending Period</th>
+						<th>Total</th>
+					</tr>
+				</thead>
+				<?php if ($billedEventResources && count($billedEventResources) > 0) : ?>
+				<tbody>
+					<?php foreach($billedEventResources as $key => $billedEventResource): ?>
+						<tr>
+							<td width="5%"><a href="/bills/show/<?= $billedEventResource["bill_id"]?>"><?= $billedEventResource["bill_id"]?></td></a>
+							<td width="5%"><?= $billedEventResource["start_at"]?></td>
+							<td width="5%"><?= $billedEventResource["end_at"]?></td>
+							<td width="5%"><?= $billedEventResource["total"]?></td>
+						</tr>
+					<?php endforeach; ?>
+				</tbody> 
+				<?php endif; ?>
+			</table>
+		</div>
+	</div>
+</div>
+
+<?php endif; ?>	  
+	  
   </div>
   <!-- General Information End -->
-
-  <!-- Posts-->
+<hr>
+<!-- Posts-->
 
   <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
 
@@ -93,9 +157,9 @@ $id = $_SESSION['user'];
         <h3 class="text-center">Posts</h3>
 
         <!-- Post lists -->
-        
+
         <!-- Contains posts -->
-        
+
         <?php foreach($posts as $key => $post): ?>
 
           <div class="post">
@@ -138,16 +202,13 @@ $id = $_SESSION['user'];
 
   </div>
   <!-- Posts End-->
-</div>
 
 <style>
-
 /* .post{
   background-color: grey;
   color: white;
   margin: 10px;
 } */
-
 .comment{
   margin:20px;
   word-wrap: break-word;
@@ -155,7 +216,6 @@ $id = $_SESSION['user'];
   background-color: #f1f1f1;
   border-radius: 5px;
 }
-
 /* Chat containers */
 .post {
   word-wrap: break-word;
@@ -165,20 +225,17 @@ $id = $_SESSION['user'];
   padding: 10px;
   margin: 10px 0;
 }
-
 /* Darker chat container */
 .darker {
   border-color: #ccc;
   background-color: #ddd;
 }
-
 /* Clear floats */
 .post::after{
   content: "";
   clear: both;
   display: table;
 }
-
 /* Style images */
 .post img{
   float: left;
@@ -187,24 +244,20 @@ $id = $_SESSION['user'];
   margin-right: 20px;
   border-radius: 50%;
 }
-
 /* Style the right image */
 .post img.right {
   float: right;
   margin-left: 20px;
   margin-right:0;
 }
-
 /* Style time text */
 .time-right {
   float: right;
   color: #aaa;
 }
-
 /* Style time text */
 .time-left {
   float: left;
   color: #999;
 }
-
-</style>
+</style> 

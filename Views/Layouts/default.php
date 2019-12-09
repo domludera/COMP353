@@ -107,6 +107,26 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
       </li>
 	  <!--END IF SYSTEM ADMIN-->
     <?php endif; ?>
+	
+	  <!--IF CONTROLLER-->
+    <?php if($user->isController($id)) : ?>
+      <!-- Divider -->
+      <hr class="sidebar-divider" />
+      <!-- Heading -->
+      <div class="sidebar-heading" style="text-align:center">
+        Controller
+      </div>
+	  <!-- Nav Item - Pages Collapse Menu -->
+      <li class="nav-item">
+        <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTo" aria-expanded="true" aria-controls="collapseTo"><i class="fas fa-fw fa-cog"></i> <span>System</span></a>
+        <div id="collapseTo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+          <div class="bg-white py-2 collapse-inner rounded">
+            <h6 class="collapse-header">Select:</h6><a class="collapse-item" href="/resources">Resources</a> 
+          </div>
+        </div>
+      </li>
+	  <!--END IF CONTOLLER-->
+    <?php endif; ?>
 	  <!--END IF Logged in-->
     <?php endif; ?>
 	  <!--IF NOT SIGNED IN NAV SIDE BAR-->

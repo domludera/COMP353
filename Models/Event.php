@@ -81,6 +81,54 @@ class Event extends Model
         return $stmt->get_result();
     }
 
+	/**
+     * Event Resources Section
+     */
+     public function eventResources($eventId){
+		if(!$eventId){
+            return $eventId;
+        };
+		$sql = "SELECT resources.name AS resource_name, resources.rate FROM event_resources 
+				JOIN events ON event_resources.event_id = events.id
+				JOIN resources ON event_resources.resource_id = resources.id
+				WHERE event_resources.event_id=?;";
+				
+		$conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        echo mysqli_error($conn);
+        
+        $stmt->bind_param(
+            "i", // tells you what type the vars will be (check php docs for more info)
+            $eventId
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+        
+    }
+	
+	/**
+     * Billed Event Resources Section
+     */
+     public function billedEventResources($eventId){
+		if(!$eventId){
+            return $eventId;
+        };
+		$sql = "SELECT billed_event_resources.id, billed_event_resources.bill_id, event_resources.start_at, event_resources.end_at, bill.total FROM billed_event_resources 
+				JOIN event_resources ON billed_event_resources.event_resources_id = event_resources.id
+				JOIN bill ON billed_event_resources.bill_id = bill.id WHERE event_resources.event_id=?";
+		
+		$conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        echo mysqli_error($conn);
+        
+        $stmt->bind_param(
+            "i", // tells you what type the vars will be (check php docs for more info)
+            $eventId
+        );
+        $stmt->execute();
+        return $stmt->get_result();
+        
+    }
     
     /**
      * Groups Section
@@ -197,5 +245,6 @@ class Event extends Model
         $stmt->execute();
         return $stmt->get_result();
     }
+
 }
 ?>

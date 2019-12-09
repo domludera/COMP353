@@ -12,7 +12,7 @@ class Post extends Model
         return $stmt->get_result();
     }
 
-    public function byEvent($eventId)
+     public function byEvent($eventId)
     {
         $sql = "SELECT posts.*, users.email FROM posts 
             join users on posts.user_id=users.id
@@ -21,8 +21,8 @@ class Post extends Model
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
-        
         echo mysqli_error($conn);
+         
         $stmt->bind_param(
             "i", // tells you what type the vars will be (check php docs for more info)
             $eventId
@@ -57,7 +57,7 @@ class Post extends Model
     public function create($eventId,$userId,$content)
     {
         $sql = "INSERT INTO posts 
-                (event_id, user_id, content, created_at, updated_at) 
+                 (event_id, user_id, content, created_at, updated_at) 
                 VALUES (?, ?, ?, ?, ?);";
 
         $conn = Database::getBdd();

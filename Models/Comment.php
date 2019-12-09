@@ -68,7 +68,7 @@ class Comment extends Model
         $now = date('Y-m-d H:i:s');
         $stmt->bind_param(
             "iisss", // tells you what type the vars will be (check php docs for more info)
-            $groupId,
+             $groupId,
             $userId,
             $content,
             $now,
