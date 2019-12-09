@@ -3,9 +3,15 @@
   <div class="card-header py-3">
     <h6 class="m-0 font-weight-bold text-primary">Inbox</h6>
   </div>
+  <p></p>
+  <div class="container">
+      <div class="col-xs-6">
+        <div class="col-md-12">
   <form action="/mails/create/" method="get">
     <button type="submit" style="right-side" class="btn btn-primary">New Mail</button>
   </form>
+  </div>
+      </div>
   <div class="card-body">
     <div class="table-responsive">
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
