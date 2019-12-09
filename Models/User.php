@@ -84,7 +84,9 @@ class User extends Model {
     /**
      * Create new user TODO:: Check if email already in use
      */
-    public function create($email, $password, $name, $dob, $region, $profession) {
+   public function create($email, $password, $name, $dob, $region, $profession)
+    {
+        $hash_password = password_hash($password, 1);
         $now = date('Y-m-d H:i:s');
 
         $sql = "INSERT INTO users 
@@ -95,8 +97,15 @@ class User extends Model {
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-                "ssssssss", // tells you what type the vars will be (check php docs for more info)
-                $email, $password, $name, $dob, $region, $profession, $now, $now
+            "ssssssss", // tells you what type the vars will be (check php docs for more info)
+            $email,
+            $hash_password,
+			$name,
+            $dob,
+            $region,
+            $profession,
+            $now,
+            $now
         );
         $stmt->execute();
         $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
@@ -126,15 +135,16 @@ class User extends Model {
     /**
      * Validate credentials
      */
-    public function validate($email, $password) {
-        $sql = "SELECT * FROM users WHERE email=? AND password = ?;";
+      public function validate($email)
+    {
+        $sql = "SELECT * FROM users WHERE email=?;";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-                "ss", // tells you what type the vars will be (check php docs for more info)
-                $email, $password
+            "s", // tells you what type the vars will be (check php docs for more info)
+            $email
         );
         $stmt->execute();
         return $stmt->get_result();
