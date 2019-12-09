@@ -9,6 +9,7 @@ class eventsController extends Controller
         require_once(ROOT . 'Models/Event.php');
         $event = new Event();
         $results["events"] = Event::resultToArray($event->all());
+        $results["archivedEvents"] = Event::resultToArray($event->allArchived());
         $this->set($results);
         $this->render("index");
     }

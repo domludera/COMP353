@@ -92,7 +92,7 @@ $id = $_SESSION['user'];
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($events as $key => $value): ?>
+                                            <?php foreach ($archivedEvents as $key => $value): ?>
                                                 <tr>
                                                     <td>
                                                         <a href="/events/show/<?= $value['id'] ?>"><?= $value["id"] ?> </a>
