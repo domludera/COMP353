@@ -19,24 +19,24 @@
                 <thead>
                     <tr>
                         <th>Resource</th>
-                        <th>Rate</th>
+						<th>Data</th>
+                        <th>Rate (CAN $)</th>
                     </tr>
                 </thead>
                 <?php if ($resources && count($resources) > 0) : ?>
                     <tbody>
                         <?php foreach ($resources as $key => $value): ?>
                             <tr>
-                                <td width="25%"><?= $value["name"] ?>
-                                </td>
-                                <td width="5%">
-                                    <?= $value["rate"] ?>                                    
-                                </td>
+                                <td width="20%"><?= $value["name"] ?></td>
+								<td width="15%"><?= $value["data"] ?></td>
+                                <td width="10%"><?= $value["rate"] ?></td>
                             </tr><?php endforeach; ?>
                     </tbody><?php endif; ?>
                 <tfoot>
                     <tr>
                         <th>Resource</th>
-                        <th>Rate</th>
+						<th>Data</th>
+                        <th>Rate (CAN $)</th>
                     </tr>
                 </tfoot>
             </table>

@@ -18,10 +18,10 @@ class Bill extends Model {
         if (!$id) {
             return $id;
         };
-        $sql = "SELECT bill.id, event_resources.start_at, event_resources.end_at, bill.total FROM bill
-				JOIN billed_event_resources ON bill.id = billed_event_resources.id 
-				JOIN event_resources ON bill.resource_id = event_resources.resource_id WHERE bill.id=?;";
-
+        //$sql = "SELECT bill.id, event_resources.start_at, event_resources.end_at, bill.total FROM bill
+		//		JOIN billed_event_resources ON bill.id = billed_event_resources.id 
+		//		JOIN event_resources ON bill.resource_id = event_resources.resource_id WHERE bill.id=?;";
+		$sql = "SELECT * FROM bill WHERE bill.id=?;";
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
         echo mysqli_error($conn);
@@ -37,19 +37,17 @@ class Bill extends Model {
     /**
      * Creates a bill
      */
-    public function create($id, $start_at, $end_at, $total) {
-        $sql = "INSERT INTO bills 
-                (id , start_at, end_at, total) 
+    public function create($event_id, $total) {
+        $sql = "INSERT INTO bill 
+                (event_id , total) 
                 VALUES (?, ?);";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-                "iddi", // tells you what type the vars will be (check php docs for more info)
-                $id, 
-				$start_at,
-				$end_at,
+                "ii", // tells you what type the vars will be (check php docs for more info)
+                $event_id,
 				$total
         );
         $stmt->execute();

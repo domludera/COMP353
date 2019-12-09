@@ -35,17 +35,17 @@ class Resource extends Model {
     /**
      * Creates a resource
      */
-    public function create($name, $rate) {
+    public function create($name, $data, $rate) {
         $sql = "INSERT INTO resources 
-                (name , rate) 
-                VALUES (?, ?);";
+                (name , data, rate) 
+                VALUES (?, ?, ?);";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-                "si", // tells you what type the vars will be (check php docs for more info)
-                $name, $rate
+                "ssi", // tells you what type the vars will be (check php docs for more info)
+                $name, $data, $rate
         );
         $stmt->execute();
         $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record
