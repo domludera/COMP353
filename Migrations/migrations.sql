@@ -20,7 +20,7 @@ CREATE TABLE interests
 CREATE TABLE users
 (
     id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    email      CHAR(255),
+    email      CHAR(255) NOT NULL,
     password   CHAR(255),
     name       CHAR(255),
     dob        DATE,
@@ -243,6 +243,17 @@ SELECT end_at
 	IF CURDATE() > event_end_date
 	THEN
 		SET NEW.event_id = NULL;
+	END IF;
+END//
+
+CREATE TRIGGER emails_unique
+	BEFORE INSERT
+	ON users
+	FOR EACH ROW
+BEGIN
+	IF EXISTS(SELECT * FROM users WHERE users.email = NEW.email)
+	THEN
+		SET NEW.email = NULL;
 	END IF;
 END//
 
