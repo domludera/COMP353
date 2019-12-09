@@ -20,7 +20,7 @@ CREATE TABLE interests
 CREATE TABLE users
 (
     id         int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    email      CHAR(255),
+    email      CHAR(255) NOT NULL,
     password   CHAR(255),
     name       CHAR(255),
     dob        DATE,
@@ -28,7 +28,9 @@ CREATE TABLE users
     profession CHAR(255),
 	image	   VARCHAR(255) DEFAULT NULL,
     created_at Date,
-    updated_at Date
+    updated_at Date,
+	
+	CHECK (dob <= CURDATE())
 );
 CREATE TABLE privileges
 (
@@ -82,62 +84,23 @@ CREATE TABLE events
     manager_id    int,
 
     FOREIGN KEY (event_type_id) REFERENCES event_types (id),
-    FOREIGN KEY (manager_id) REFERENCES users (id)
+    FOREIGN KEY (manager_id) REFERENCES users (id),
+	
+	CHECK (start_at <= end_at),
+	CHECK (start_at >= CURDATE())
+
 );
 
 -- Many-to-Manys
 CREATE TABLE user_attending
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    user_id  int,
-    event_id int,
+    user_id  int NOT NULL,
+    event_id int NOT NULL,
 
     -- fkeys
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (event_id) REFERENCES events (id)
-);
-
-CREATE TABLE event_resources
-(
-    id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    event_id int,
-    resource_id  int,
-    rate float,
-    start_at Date,
-    end_at Date,
-
-    -- fkeys
-    FOREIGN KEY (event_id) REFERENCES events (id),
-    FOREIGN KEY (resource_id) REFERENCES resources (id)
-);
-
-CREATE TABLE billed_event_resources
-(
-    id       			int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    bill_id 			int,
-    event_resources_id  int,
-   
-    -- fkeys
-    FOREIGN KEY (bill_id) REFERENCES bill (id),
-    FOREIGN KEY (event_resources_id) REFERENCES event_resources (id)
-);
-
-/*
-Billing
-*/
--- Lookups
-CREATE TABLE resources
-(
-    id   int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    name CHAR(255)
-);
-
--- Models
-CREATE TABLE bill
-(
-    id            	int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    resource_id 	int,
-    total      		float
 );
 
 /*
@@ -213,19 +176,24 @@ CREATE TABLE messages
 CREATE TABLE posts
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    content  CHAR(255),
-    group_id int,
+    content  LONGTEXT,
+    event_id int,
     user_id  int,
+    created_at DATETIME,
+    updated_at DATETIME,
+
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (group_id) REFERENCES app_groups (id)
+    FOREIGN KEY (event_id) REFERENCES events (id)
 );
 
 CREATE TABLE comments
 (
     id      int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    content CHAR(255),
+    content LONGTEXT,
     post_id int,
     user_id int,
+    created_at DATETIME,
+    updated_at DATETIME,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (post_id) REFERENCES posts (id)
 );
@@ -249,6 +217,52 @@ CREATE TABLE mails
 );
 -- Many-to-Manys
 
+CREATE TABLE event_resources
+(
+    id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    event_id int,
+    resource_id  int,
+    rate float,
+    start_at Date,
+    end_at Date,
+
+    -- fkeys
+    FOREIGN KEY (event_id) REFERENCES events (id),
+    FOREIGN KEY (resource_id) REFERENCES resources (id)
+);
+
+CREATE TABLE billed_event_resources
+(
+    id       			int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    bill_id 			int,
+    event_resources_id  int,
+   
+    -- fkeys
+    FOREIGN KEY (bill_id) REFERENCES bill (id),
+    FOREIGN KEY (event_resources_id) REFERENCES event_resources (id)
+);
+
+/*
+Billing
+*/
+-- Lookups
+CREATE TABLE resources
+(
+    id   int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(255),
+    data CHAR(255),
+    rate float
+);
+
+-- Models
+CREATE TABLE bill
+(
+    id            	int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    event_id 		int,
+    total      		float
+);
+
+
 /*------------------ Sample Section -----------------------*/
 /*
  Section
@@ -257,3 +271,36 @@ CREATE TABLE mails
 -- Lookups
 -- Models
 -- Many-to-Manys
+
+
+delimiter //
+CREATE TRIGGER attending_archived
+	BEFORE INSERT
+	ON user_attending
+	FOR EACH ROW
+BEGIN
+DECLARE event_end_date DATE;
+
+SELECT end_at
+	INTO event_end_date
+	FROM events
+	WHERE events.id = NEW.event_id;
+	
+	IF CURDATE() > event_end_date
+	THEN
+		SET NEW.event_id = NULL;
+	END IF;
+END//
+
+CREATE TRIGGER emails_unique
+	BEFORE INSERT
+	ON users
+	FOR EACH ROW
+BEGIN
+	IF EXISTS(SELECT * FROM users WHERE users.email = NEW.email)
+	THEN
+		SET NEW.email = NULL;
+	END IF;
+END//
+
+delimiter ;
