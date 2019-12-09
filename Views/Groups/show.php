@@ -41,12 +41,7 @@ $id = $_SESSION['user'];
     <?php endif; ?>
 
     <?php if($groupManager->isOwner($group["id"],$id)) : ?>
-
-    <hr>
-        <?php
-
-        echo "<iframe src=\"https://kiwiirc.com/client/irc.kiwiirc.com/#com353SCCgroup" . $group["id"] . "\"" . " style=\"border:0; width:100%; height:450px;\"></iframe>";
-        ?>
+    
     <hr>
         <div class="form-group text-center">    
        <h3>Pending Requests</h3>

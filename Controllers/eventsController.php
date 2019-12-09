@@ -89,20 +89,20 @@ class eventsController extends Controller
         $this->authed();
         require_once(ROOT . 'Models/Event.php');
         require_once(ROOT . 'Models/Group.php');
-        require_once(ROOT . 'Models/Post.php');
-        require_once(ROOT . 'Models/Comment.php');
+		require_once(ROOT . 'Models/EventResources.php');
+		require_once(ROOT . 'Models/BilledEventResources.php');
         $event = new Event();
         $group = new Group();
-        $post = new Post();
-        $comment = new Comment();
+		$eventResource = new EventResources();
+		$billedEventResource = new BilledEventResources();
+		
         $results["event"] = Event::resultToArray($event->find($id))[0];
         $results["attendees"] = Event::resultToArray($event->attendees($results["event"]["id"]));
-        $results["groups"] = Event::resultToArray($event->groups($results["event"]["id"]));        
-        $results["posts"] =  Post::resultToArray($post->byEvent($id));
-
-        foreach ($results["posts"] as $key => $post) {
-            $results["posts"][$key]['comments'] = Comment::resultToArray($comment->byPost($post["id"]));
-        }
+        $results["groups"] = Event::resultToArray($event->groups($results["event"]["id"]));
+		$results["eventResources"] = Event::resultToArray($event->eventResources($results["event"]["id"]));
+		$results["billedEventResources"] = Event::resultToArray($event->billedEventResources($results["event"]["id"]));
+		        
+        // var_dump($results);
         $this->set($results);
         $this->render("show");
     }

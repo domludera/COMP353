@@ -7,7 +7,6 @@
   <div class="card-body">
     <div class="row no-gutters align-items-center">
       <div class="col mr-2">
-        <ul class="nav-item active">
           <div class="table-responsive">
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
               <thead>
@@ -44,7 +43,6 @@
             </table><?php endif; ?><!-- No Mail Pending -->
             <?php if(!$events || count($events) == 0) : ?>No events! <?php endif; ?>
           </div>
-        </ul>
       </div>
     </div>
   </div>

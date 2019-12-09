@@ -1,5 +1,7 @@
 <h1>Group</h1>
 <form action="/group/create" method="post">
+
+
     <?php if($event) : ?>
         <div class="form-group">
             <label for="text">Parent Event</label>

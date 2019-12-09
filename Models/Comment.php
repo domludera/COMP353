@@ -14,14 +14,10 @@ class Comment extends Model
 
     public function byPost($postId)
     {
-        $sql = "SELECT * FROM comments
-            join users on comments.user_id=users.id
-            where post_id = ?
-            order by comments.created_at DESC;";
+        $sql = "SELECT * FROM comments where post_id = ?;";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
-        echo mysqli_error($conn);
         
         $stmt->bind_param(
             "i", // tells you what type the vars will be (check php docs for more info)
@@ -57,22 +53,19 @@ class Comment extends Model
     public function create($groupId,$userId,$content)
     {
         $sql = "INSERT INTO comments 
-                (post_id, user_id, content, created_at, updated_at) 
-                VALUES (?, ?, ?,?,?);";
+                (post_id, user_id, content) 
+                VALUES (?, ?, ?);";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
 
         echo mysqli_error($conn);
 
-        $now = date('Y-m-d H:i:s');
         $stmt->bind_param(
-            "iisss", // tells you what type the vars will be (check php docs for more info)
+            "iis", // tells you what type the vars will be (check php docs for more info)
             $groupId,
             $userId,
-            $content,
-            $now,
-            $now
+            $content
         );
         $stmt->execute();
         $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record

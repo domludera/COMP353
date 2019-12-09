@@ -4,45 +4,50 @@
     <h6 class="m-0 font-weight-bold text-primary">Inbox</h6>
   </div>
   <p></p>
-  <div class="container">
       <div class="col-xs-6">
         <div class="col-md-12">
-  <form action="/mails/create/" method="get">
-    <button type="submit" style="right-side" class="btn btn-primary">New Mail</button>
-  </form>
-  </div>
+		  <form action="/mails/create/" method="get">
+			<button type="submit" style="right-side" class="btn btn-primary">New Mail</button>
+		  </form>
+		</div>
       </div>
-  <div class="card-body">
-    <div class="table-responsive">
-      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
-          <tr>
-            <th>Id</th>
-            <th>From (user Id)</th>
-            <th>Subject</th>
-          </tr>
-        </thead><?php if($mails && count($mails) > 0) : ?>
-        <tbody>
-          <?php foreach($mails as $key => $value): ?>
-          <tr>
-            <td>
-              <a href="/mails/show/<?= $value["id"]?>"><?= $value["id"]?>
-              </a>
-            </td>
-            <td><?= $value["from_user_id"]?>
-            </td>
-            <td><?= $value["subject"]?>
-            </td>
-          </tr><?php endforeach; ?>
-        </tbody><?php endif; ?>
-        <tfoot>
-          <tr>
-            <th>Id</th>
-            <th>From (user Id)</th>
-            <th>Subject</th>
-          </tr>
-        </tfoot>
-      </table>
-    </div>
-  </div>
+	<div class="card-body">
+		<div class="row no-gutters align-items-center">
+			<div class="col mr-2">
+				<ul class="nav-item active">
+					<div class="table-responsive">
+					  <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+						<thead>
+						  <tr>
+							<th>Id</th>
+							<th>From (user Id)</th>
+							<th>Subject</th>
+						  </tr>
+						</thead><?php if($mails && count($mails) > 0) : ?>
+						<tbody>
+						  <?php foreach($mails as $key => $value): ?>
+						  <tr>
+							<td>
+							  <a href="/mails/show/<?= $value["id"]?>"><?= $value["id"]?>
+							  </a>
+							</td>
+							<td><?= $value["from_user_id"]?>
+							</td>
+							<td><?= $value["subject"]?>
+							</td>
+						  </tr><?php endforeach; ?>
+						</tbody><?php endif; ?>
+						<tfoot>
+						  <tr>
+							<th>Id</th>
+							<th>From (user Id)</th>
+							<th>Subject</th>
+						  </tr>
+						</tfoot>
+					  </table>
+					</div>
+				</ul>
+			</div>
+		</div>
+	</div>
 </div>

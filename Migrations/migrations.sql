@@ -28,9 +28,7 @@ CREATE TABLE users
     profession CHAR(255),
 	image	   VARCHAR(255) DEFAULT NULL,
     created_at Date,
-    updated_at Date,
-	
-	CHECK (dob <= CURDATE())
+    updated_at Date
 );
 CREATE TABLE privileges
 (
@@ -84,11 +82,7 @@ CREATE TABLE events
     manager_id    int,
 
     FOREIGN KEY (event_type_id) REFERENCES event_types (id),
-    FOREIGN KEY (manager_id) REFERENCES users (id),
-	
-	CHECK (start_at <= end_at),
-	CHECK (start_at >= CURDATE())
-
+    FOREIGN KEY (manager_id) REFERENCES users (id)
 );
 
 -- Many-to-Manys
@@ -101,6 +95,49 @@ CREATE TABLE user_attending
     -- fkeys
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (event_id) REFERENCES events (id)
+);
+
+CREATE TABLE event_resources
+(
+    id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    event_id int,
+    resource_id  int,
+    rate float,
+    start_at Date,
+    end_at Date,
+
+    -- fkeys
+    FOREIGN KEY (event_id) REFERENCES events (id),
+    FOREIGN KEY (resource_id) REFERENCES resources (id)
+);
+
+CREATE TABLE billed_event_resources
+(
+    id       			int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    bill_id 			int,
+    event_resources_id  int,
+   
+    -- fkeys
+    FOREIGN KEY (bill_id) REFERENCES bill (id),
+    FOREIGN KEY (event_resources_id) REFERENCES event_resources (id)
+);
+
+/*
+Billing
+*/
+-- Lookups
+CREATE TABLE resources
+(
+    id   int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    name CHAR(255)
+);
+
+-- Models
+CREATE TABLE bill
+(
+    id            	int NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    resource_id 	int,
+    total      		float
 );
 
 /*
@@ -176,24 +213,19 @@ CREATE TABLE messages
 CREATE TABLE posts
 (
     id       int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    content  LONGTEXT,
-    event_id int,
+    content  CHAR(255),
+    group_id int,
     user_id  int,
-    created_at DATETIME,
-    updated_at DATETIME,
-
     FOREIGN KEY (user_id) REFERENCES users (id),
-    FOREIGN KEY (event_id) REFERENCES events (id)
+    FOREIGN KEY (group_id) REFERENCES app_groups (id)
 );
 
 CREATE TABLE comments
 (
     id      int NOT NULL AUTO_INCREMENT PRIMARY KEY,
-    content LONGTEXT,
+    content CHAR(255),
     post_id int,
     user_id int,
-    created_at DATETIME,
-    updated_at DATETIME,
     FOREIGN KEY (user_id) REFERENCES users (id),
     FOREIGN KEY (post_id) REFERENCES posts (id)
 );

@@ -3,7 +3,7 @@
 // TODO: Can't test without having groups done first
 class postsController extends Controller
 {
-    function create($eventId)
+    function create()
     {
         $this->authed();
         // METHOD: POST
@@ -11,12 +11,12 @@ class postsController extends Controller
             require_once(ROOT . 'Models/Post.php');
             $post = new Post();
             $results = $post->create(
-                $eventId,
-                $_SESSION["user"],
+                $_POST["group_id"],
+                $_POST["user_id"],
                 $_POST["content"]
             );
-            // var_dump(Post::resultToArray($results));
-            $this->redirect("/events/show/$eventId");
+            // echo json_encode(Mail::resultToArray($results)[0]);
+            $this->redirect("/posts");
         }
     }
 
