@@ -125,9 +125,11 @@ if (isset($_SESSION['user']) && $_SESSION["user"]) {
         <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo"><span>Description of project details goes here.</span></a> <?php endif; ?> <!-- Divider -->
         <hr class="sidebar-divider my-0" />
         <!-- Sidebar Toggler (Sidebar) -->
+        <!--Not implemented
         <div class="text-center d-none d-md-inline">
           <button class="rounded-circle border-0" id="sidebarToggle"></button>
         </div>
+        -->
       </li>
     </ul>
 	<!-- End of Sidebar -->

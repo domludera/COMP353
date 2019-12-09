@@ -50,12 +50,6 @@ $id = $_SESSION['user'];
                                             <?php endforeach; ?>
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Start</th>
-                                                <th>End</th>
-                                            </tr>
                                         </tfoot>
                                     </table>
                                 <?php endif; ?>
@@ -107,12 +101,6 @@ $id = $_SESSION['user'];
                                             <?php endforeach; ?>
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Start</th>
-                                                <th>End</th>
-                                            </tr>
                                         </tfoot>
                                     </table>
                                     <!-- No archived Events -->
