@@ -50,12 +50,6 @@ $id = $_SESSION['user'];
                                             <?php endforeach; ?>
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Start</th>
-                                                <th>End</th>
-                                            </tr>
                                         </tfoot>
                                     </table>
                                 <?php endif; ?>
@@ -92,7 +86,7 @@ $id = $_SESSION['user'];
                                             </tr>
                                         </thead>
                                         <tbody>
-                                            <?php foreach ($events as $key => $value): ?>
+                                            <?php foreach ($archivedEvents as $key => $value): ?>
                                                 <tr>
                                                     <td>
                                                         <a href="/events/show/<?= $value['id'] ?>"><?= $value["id"] ?> </a>
@@ -107,12 +101,6 @@ $id = $_SESSION['user'];
                                             <?php endforeach; ?>
                                         </tbody>
                                         <tfoot>
-                                            <tr>
-                                                <th>Id</th>
-                                                <th>Name</th>
-                                                <th>Start</th>
-                                                <th>End</th>
-                                            </tr>
                                         </tfoot>
                                     </table>
                                     <!-- No archived Events -->

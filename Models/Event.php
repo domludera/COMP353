@@ -4,7 +4,20 @@ class Event extends Model
     public function all()
     {
         $sql = "SELECT events.* FROM events 
-            join event_types on events.event_type_id=event_types.id;";
+            join event_types on events.event_type_id=event_types.id
+			WHERE CURDATE() <= events.end_at;";
+
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        return $stmt->get_result();
+    }
+	
+	public function allArchived()
+    {
+        $sql = "SELECT events.* FROM events 
+            join event_types on events.event_type_id=event_types.id
+			WHERE CURDATE() > events.end_at;";
 
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
