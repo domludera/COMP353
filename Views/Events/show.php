@@ -131,7 +131,6 @@ $currentUser = new User();
 	  
   </div>
   <!-- General Information End -->
-<hr>
 <!-- Posts-->
 
   <div class="tab-pane fade" id="posts" role="tabpanel" aria-labelledby="posts-tab">
@@ -260,4 +259,8 @@ $currentUser = new User();
   float: left;
   color: #999;
 }
-</style> 
+    .tab-content{
+        width: 100%;
+        margin: 10%;
+    }
+</style>
