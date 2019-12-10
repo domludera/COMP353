@@ -76,18 +76,17 @@ $currentUser = new User();
 				<thead>
 					<tr>
 						<th>Resource</th>
-						<th>Rate</th>
+						<th>Data</th>
+						<th>Rate (CAN$)</th>
 					</tr>
 				</thead>
 				<?php if ($eventResources && count($eventResources) > 0) : ?>
 					<tbody>
 						<?php foreach($eventResources as $key => $eventResource): ?>
 							<tr>
-								<td width="25%"><?= $eventResource["resource_name"]?>
-								</td>
-								<td width="5%">
-									<?= $eventResource["rate"]?>                                   
-								</td>
+								<td width="20%"><?= $eventResource["resource_name"]?></td>
+								<td width="15%"><?= $eventResource["resource_data"]?></td>
+								<td width="10%"><?= $eventResource["rate"]?></td>
 							</tr><?php endforeach; ?>
 					</tbody>
 				<?php endif; ?>
@@ -110,11 +109,13 @@ $currentUser = new User();
 						<th>Total</th>
 					</tr>
 				</thead>
+			
 				<?php if ($billedEventResources && count($billedEventResources) > 0) : ?>
 				<tbody>
-					<?php foreach($billedEventResources as $key => $billedEventResource): ?>
+				<?php foreach($billedEventResources as $key => $billedEventResource): ?>
 						<tr>
-							<td width="5%"><a href="/bills/show/<?= $billedEventResource["bill_id"]?>"><?= $billedEventResource["bill_id"]?></td></a>
+						
+							<td width="5%"><?= $billedEventResource["bill_id"]?></td>
 							<td width="5%"><?= $billedEventResource["start_at"]?></td>
 							<td width="5%"><?= $billedEventResource["end_at"]?></td>
 							<td width="5%"><?= $billedEventResource["total"]?></td>

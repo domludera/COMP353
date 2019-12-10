@@ -101,10 +101,10 @@ class Event extends Model
 		if(!$eventId){
             return $eventId;
         };
-		$sql = "SELECT resources.name AS resource_name, resources.rate FROM event_resources 
+		$sql = "SELECT event_resources.*, events.name AS event_name, resources.name AS resource_name, resources.data AS resource_data FROM event_resources 
 				JOIN events ON event_resources.event_id = events.id
 				JOIN resources ON event_resources.resource_id = resources.id
-				WHERE event_resources.event_id=?;";
+				WHERE events.id=?;";
 				
 		$conn = Database::getBdd();
         $stmt = $conn->prepare($sql);

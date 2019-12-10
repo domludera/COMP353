@@ -18,10 +18,10 @@ class Bill extends Model {
         if (!$id) {
             return $id;
         };
-        //$sql = "SELECT bill.id, event_resources.start_at, event_resources.end_at, bill.total FROM bill
-		//		JOIN billed_event_resources ON bill.id = billed_event_resources.id 
-		//		JOIN event_resources ON bill.resource_id = event_resources.resource_id WHERE bill.id=?;";
-		$sql = "SELECT * FROM bill WHERE bill.id=?;";
+		$sql = "SELECT Distinct bill.id, event_resources.start_at AS start_at, event_resources.end_at AS end_at, bill.total FROM bill 
+				JOIN billed_event_resources ON bill.id = billed_event_resources.bill_id
+				JOIN event_resources ON bill.event_id = event_resources.event_id 
+				WHERE bill.id=?;";
         $conn = Database::getBdd();
         $stmt = $conn->prepare($sql);
         echo mysqli_error($conn);
