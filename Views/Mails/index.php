@@ -14,35 +14,36 @@
       </div>
 <div class="card-body">
     <div class="table-responsive">
+        <?php if($mails && count($mails) > 0) : ?>
       <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-        <thead>
+          <colgroup>
+              <col span="1" style="width: 10%;">
+              <col span="1" style="width: 90%;">
+          </colgroup>
+          <thead>
           <tr>
-            <th>Id</th>
-            <th>From (user Id)</th>
+              <th>From (user Id)</th>
             <th>Subject</th>
           </tr>
-        </thead><?php if($mails && count($mails) > 0) : ?>
+        </thead>
         <tbody>
           <?php foreach($mails as $key => $value): ?>
           <tr>
-            <td>
-              <a href="/mails/show/<?= $value["id"]?>"><?= $value["id"]?>
-              </a>
-            </td>
             <td><?= $value["from_user_id"]?>
             </td>
-            <td><?= $value["subject"]?>
+            <td>
+                <a href="/mails/show/<?= $value["id"]?>">
+                <?= $value["subject"]?>
+                </a>
             </td>
           </tr><?php endforeach; ?>
-        </tbody><?php endif; ?>
+        </tbody>
         <tfoot>
-          <tr>
-            <th>Id</th>
-            <th>From (user Id)</th>
-            <th>Subject</th>
-          </tr>
         </tfoot>
       </table>
+          <?php else : ?>
+              <p> You have no mail </p>
+        <?php endif; ?>
     </div>
   </div>
 </div>
