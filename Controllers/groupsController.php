@@ -176,5 +176,14 @@ class groupsController extends Controller
         $this->redirect('/groups/');
     }
 
+    function kick($groupId, $userId){
+        $this->authed();
+        require(ROOT . 'Models/User.php');
+        require(ROOT . 'Models/Group.php');
 
+        $groupManager = new Group();
+        $groupManager->leaveGroup($groupId,$userId);
+
+        $this->redirect('/groups/show/' . $groupId);
+    }
 }

@@ -65,7 +65,26 @@ $id = $_SESSION['user'];
     <h2>Members</h2>
     <ul class="list-group">
     <?php foreach($members as $key => $user): ?>
-        <li class="list-group-item"><?= $user["email"]?></li> 
+        <li class="list-group-item">
+            <table style="width: 100%">
+                <colgroup>
+                    <col span="1" style="width: 90%;">
+                    <col span="1" style="width: 10%;">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>
+                        <?= $user["email"]?>
+                    </td>
+                    <?php if($groupManager->isOwner($group["id"],$id)) : ?>
+                    <td>
+                        <a class="btn btn-danger " href="/groups/kick/<?=$group["id"]?>/<?=$user["user_id"]?>" role="button">Kick</a>
+                    </td>
+                    <?php endif; ?>
+                </tr>
+                </tbody>
+            </table>
+        </li>
     <?php endforeach; ?>
     </ul>
 
