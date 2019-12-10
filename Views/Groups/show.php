@@ -42,9 +42,7 @@ $id = $_SESSION['user'];
 
     <hr>
     <h3>Chat</h3>
-    <?php
-    echo "<iframe src=\"https://kiwiirc.com/client/irc.kiwiirc.com/#com353SCCgroup" . $group["id"] . "\"" . " style=\"border:0; width:100%; height:450px;\"></iframe>";
-    ?>
+    <?="<iframe src=\"https://kiwiirc.com/client/irc.kiwiirc.com/#com353SCCgroup" . $group["id"] . "\"" . " style=\"border:0; width:100%; height:450px;\"></iframe>"; ?>
 
     <?php if($groupManager->isOwner($group["id"],$id)) : ?>
     <hr>
@@ -68,11 +66,15 @@ $id = $_SESSION['user'];
         <li class="list-group-item">
             <table style="width: 100%">
                 <colgroup>
+                    <col span="1" style="width: 5%;">
                     <col span="1" style="width: 90%;">
-                    <col span="1" style="width: 10%;">
+                    <col span="1" style="width: 5%;">
                 </colgroup>
                 <tbody>
                 <tr>
+                    <td>
+                        <?= $user["user_id"] ?>
+                    </td>
                     <td>
                         <?= $user["email"]?>
                     </td>
