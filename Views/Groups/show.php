@@ -40,11 +40,13 @@ $id = $_SESSION['user'];
         <?php endif; ?>
     <?php endif; ?>
 
-    <?php if($groupManager->isOwner($group["id"],$id)) : ?>
     <hr>
-        <?php
-        echo "<iframe src=\"https://kiwiirc.com/client/irc.kiwiirc.com/#com353SCCgroup" . $group["id"] . "\"" . " style=\"border:0; width:100%; height:450px;\"></iframe>";
-        ?>
+    <h3>Chat</h3>
+    <?php
+    echo "<iframe src=\"https://kiwiirc.com/client/irc.kiwiirc.com/#com353SCCgroup" . $group["id"] . "\"" . " style=\"border:0; width:100%; height:450px;\"></iframe>";
+    ?>
+
+    <?php if($groupManager->isOwner($group["id"],$id)) : ?>
     <hr>
         <div class="form-group text-center">    
        <h3>Pending Requests</h3>
@@ -63,7 +65,29 @@ $id = $_SESSION['user'];
     <h2>Members</h2>
     <ul class="list-group">
     <?php foreach($members as $key => $user): ?>
-        <li class="list-group-item"><?= $user["email"]?></li> 
+        <li class="list-group-item">
+            <table style="width: 100%">
+                <colgroup>
+                    <col span="1" style="width: 90%;">
+                    <col span="1" style="width: 10%;">
+                </colgroup>
+                <tbody>
+                <tr>
+                    <td>
+                        <?= $user["email"]?>
+                    </td>
+                    <?php if($groupManager->isOwner($group["id"],$id)) : ?>
+                    <td>
+                        <a class="btn btn-danger " href="/groups/kick/<?=$group["id"]?>/<?=$user["user_id"]?>" role="button">Kick</a>
+                    </td>
+                    <?php endif; ?>
+                </tr>
+                </tbody>
+            </table>
+        </li>
     <?php endforeach; ?>
     </ul>
+
+    <hr>
+    <a class="btn btn-danger col-lg-12" href="/groups/leave/<?=$group["id"]?>" role="button">Leave Group</a>
 </form>

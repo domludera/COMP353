@@ -162,5 +162,28 @@ class groupsController extends Controller
         $this->redirect('/groups/show/' . $groupId);
     }
 
+    function leave($groupId){
+        $this->authed();
+        require(ROOT . 'Models/User.php');
+        require(ROOT . 'Models/Group.php');
 
+        $user = new User();
+        $authed =  User::resultToArray($user->find($_SESSION["user"]))[0];
+
+        $groupManager = new Group();
+        $groupManager->leaveGroup($groupId, $authed["id"]);
+
+        $this->redirect('/groups/');
+    }
+
+    function kick($groupId, $userId){
+        $this->authed();
+        require(ROOT . 'Models/User.php');
+        require(ROOT . 'Models/Group.php');
+
+        $groupManager = new Group();
+        $groupManager->leaveGroup($groupId,$userId);
+
+        $this->redirect('/groups/show/' . $groupId);
+    }
 }

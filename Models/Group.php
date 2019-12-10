@@ -230,5 +230,20 @@ class Group extends Model
         $stmt->close();
         return true;
     }
+
+    public function leaveGroup($groupId, $userId){
+        $sql = "DELETE FROM user_group where user_id=? AND group_id=?;";
+        $conn = Database::getBdd();
+        $stmt = $conn->prepare($sql);
+
+        $stmt->bind_param(
+            "ii",
+            $userId,
+            $groupId
+        );
+        $stmt->execute();
+        $stmt->close();
+        return true;
+    }
 	
 }
