@@ -21,9 +21,9 @@ class EventResources extends Model
         if(!$id){
             return $id;
         };
-		$sql = "SELECT event_resources.*, events.name AS event_name, resources.name AS resource_name FROM event_resources 
+		$sql = "SELECT event_resources.*, events.name AS event_name, resources.name AS resource_name, resources.data AS resource_data FROM event_resources 
 				JOIN events ON event_resources.event_id = events.id
-				JOIN resources ON event_resources.resource_id = resources.id;
+				JOIN resources ON event_resources.resource_id = resources.id
 				WHERE events.id=?;";
        
 
@@ -42,7 +42,7 @@ class EventResources extends Model
     /**
      * Creates an event resource
      */
-    public function create($eventId,$resourceId,$rate,$start,$end)
+    public function create($event_id,$resource_id,$rate,$start_at,$end_at)
     {
         $sql = "INSERT INTO event_resources
                 (event_id , resource_id, rate, start_at, end_at) 
@@ -52,12 +52,12 @@ class EventResources extends Model
         $stmt = $conn->prepare($sql);
 
         $stmt->bind_param(
-            "iiidd", // tells you what type the vars will be (check php docs for more info)
-            $eventId,
-            $resourceId,
+            "iiiss", // tells you what type the vars will be (check php docs for more info)
+            $event_id,
+            $resource_id,
 			$rate,
-            $start,
-            $end
+            $start_at,
+            $end_at
         );
         $stmt->execute();
         $insertedId = $stmt->insert_id; // get le id of the last inserted auto increment record

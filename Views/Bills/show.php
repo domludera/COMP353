@@ -39,6 +39,7 @@
 					<?php foreach ($eventResources as $key => $eventResource): ?>
 						<tr>
 							<td width="10%"><?= $eventResource["resource_name"] ?></td>
+							<td width="10%"><?= $eventResource["resource_data"] ?></td>
 							<td width="10%"><?= $eventResource["rate"] ?> </td>
 						</tr>
 					<?php endforeach; ?>
